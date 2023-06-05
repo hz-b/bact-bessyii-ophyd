@@ -38,13 +38,20 @@ def bpm_config_data():
     """
 
     Todo:
-        make this hack a transparent access
-        find appropriate way to store it
+         Remove it from here please
     """
+    # BESSY II style
+    # bpm_data = mml_bpm_data.reindex(columns=columns + ["offset_x", "offset_y"])
+    # ref_orbit = read_orbit_data()
+    # ref_orbit = pd.DataFrame()
 
-    from pyml import mlsinit
     import pandas as pd
+    
+    return pd.DataFrame(read_orbit_data()).rename(columns={"ds": "s"})
+
+    raise ValueError("remove me please")
     import numpy as np
+    from pyml import mlsinit
 
     columns = [
         "name",
@@ -78,12 +85,6 @@ def bpm_config_data():
         bpm_data = bpm_data.infer_objects()
         return bpm_data
 
-    # BESSY II style
-    # bpm_data = mml_bpm_data.reindex(columns=columns + ["offset_x", "offset_y"])
-    # ref_orbit = read_orbit_data()
-    # ref_orbit = pd.DataFrame()
-
-    return pd.DataFrame(read_orbit_data()).rename(columns={"ds": "s"})
 
 class BPM(BPMR):
     """
