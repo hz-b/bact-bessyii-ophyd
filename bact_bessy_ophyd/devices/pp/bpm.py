@@ -170,13 +170,24 @@ class BPM(BPMR):
         bpm_element_list = BpmElementList()
         n_channels = 8
         signal_name = self.name + "_packed_data"
-        bpm_packed_data_chunks = np.transpose(np.reshape(data[signal_name]['value'], (n_channels, -1)))
+        # get rid of the empty data first before reshaping
+        # todo: that's the bessy ii world, perhaps to dispose them already when reading them?
+        # todo: ask colleagues to adjust the .NORD parameter?
+        # todo: check that only zeros are discarded?
+        data_buffer = data[signal_name]['value'][:1024]
+        bpm_packed_data_chunks = np.transpose(np.reshape(data_buffer, (n_channels, -1)))
         bpm_packed_data_chunks = bpm_packed_data_chunks[:self.n_valid_bpms.get()]
+        # todo: check the order of chunks in packed data
         for chunk, name in zip(bpm_packed_data_chunks, self.names.get()):
-            bpm_elem_plane_x = BpmElemPlane(chunk[0], chunk[1])
-            bpm_elem_plane_y = BpmElemPlane(chunk[2], chunk[3])
-            bpm_elem = BpmElem(x=bpm_elem_plane_x, y=bpm_elem_plane_y, intensity_z=chunk[4], intensity_s=chunk[5],
-                               stat=chunk[6], gain_raw=chunk[7], name=name)
+            # todo: is that the correct order at the machine
+            # bpm_elem_plane_x = BpmElemPlane(chunk[0], chunk[1])
+            # bpm_elem_plane_y = BpmElemPlane(chunk[2], chunk[3])
+            # todo: thats how the twin puts into the packed data
+            #       needs to follow the machine
+            bpm_elem_plane_x = BpmElemPlane(chunk[0], chunk[6])
+            bpm_elem_plane_y = BpmElemPlane(chunk[1], chunk[7])
+            bpm_elem = BpmElem(x=bpm_elem_plane_x, y=bpm_elem_plane_y, intensity_z=chunk[2], intensity_s=chunk[3],
+                               stat=chunk[4], gain_raw=chunk[5], name=name)
             bpm_element_list.add_bpm_elem(bpm_elem)
         bpm_data = {self.name + "_elem_data": bpm_element_list.to_dict(data['bpm_packed_data']['timestamp'])}
         data.update(BpmElementList().to_json(bpm_data))
