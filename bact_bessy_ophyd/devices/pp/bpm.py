@@ -137,8 +137,9 @@ class BPM(BPMR):
         #  todo: rec = recievable... or?
         rec = bpm_config_data()
         self.ds.put(rec.s.values)
-        indices = rec.idx.values - 1
-        self.configure(dict(names=rec.loc[:, "name"].values, indices=indices, n_valid_bpms=len(rec.idx.values)))
+        indices = rec.idx.values
+        #: todo fix number of bpms  for machine and twin
+        self.configure(dict(names=rec.loc[:, "name"].values, indices=indices, n_valid_bpms=123))#len(123)))#rec.idx.values)))
         return
 
     #
@@ -176,9 +177,15 @@ class BPM(BPMR):
         # todo: check that only zeros are discarded?
         data_buffer = data[signal_name]['value'][:1024]
         bpm_packed_data_chunks = np.transpose(np.reshape(data_buffer, (n_channels, -1)))
-        bpm_packed_data_chunks = bpm_packed_data_chunks[:self.n_valid_bpms.get()]
-        # todo: check the order of chunks in packed data
-        for chunk, name in zip(bpm_packed_data_chunks, self.names.get()):
+        # only take the bpm's which are valid
+        bpm_packed_data_chunks = bpm_packed_data_chunks[self.indices.get()]
+
+        # todo: get names and index correct in reading bpm data
+        names_to_use = list(self.names.get()) #+ [f'bpmz_added:{cnt}' for cnt in range(14)]
+        # ensure that zip does not finish premature
+        assert len(names_to_use) == len(bpm_packed_data_chunks)
+        # todo: check the order of chunks in packed data. already acheived by sorting the data chunks?
+        for chunk, name in zip(bpm_packed_data_chunks, names_to_use):
             # todo: is that the correct order at the machine
             # bpm_elem_plane_x = BpmElemPlane(chunk[0], chunk[1])
             # bpm_elem_plane_y = BpmElemPlane(chunk[2], chunk[3])
