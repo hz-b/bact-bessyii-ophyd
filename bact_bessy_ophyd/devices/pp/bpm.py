@@ -8,6 +8,7 @@ from databroker import catalog
 from bluesky.plans import count
 
 from bact_bessyii_mls_ophyd.devices.process.bpm_packed_data import packed_data_to_named_array
+from bact_mls_ophyd.devices.pp import bpm_configuration
 from bact_mls_ophyd.devices.raw.bpm import BPM as BPMR
 from bact_mls_ophyd.devices.pp.bpmElem import BpmElementList, BpmElemPlane, BpmElem
 import functools
@@ -29,8 +30,12 @@ def read_orbit_data():
     # return mls_data.bpm_offsets()
     # TODO:
     tmp =bpm_parameters.create_bpm_config()
+    # TODO: uncommit below two lines once discussed with Pierre
+    # retrieved_bpm_list = bpm_configuration.get_bpm_configuration()
+    # bpm_config_data_as_data_frame = pd.DataFrame(retrieved_bpm_list.bpmConfigList)
     df = pd.DataFrame(tmp)
-    return df
+    # return df
+    return bpm_config_data_as_data_frame
 
 
 @functools.lru_cache(maxsize=1)
