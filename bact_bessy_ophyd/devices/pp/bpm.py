@@ -8,11 +8,11 @@ from databroker import catalog
 from bluesky.plans import count
 
 from bact_bessyii_mls_ophyd.devices.process.bpm_packed_data import packed_data_to_named_array
-from bact_mls_ophyd.devices.pp import bpm_configuration
-from bact_mls_ophyd.devices.raw.bpm import BPM as BPMR
-from bact_mls_ophyd.devices.pp.bpmElem import BpmElementList, BpmElemPlane, BpmElem
 import functools
 from ophyd import Component as Cpt, Signal, Kind
+from custom.bessyii.ophyd.bact_bessy_ophyd.devices.pp import bpm_configuration
+from custom.bessyii.ophyd.bact_bessy_ophyd.devices.pp.bpmElem import BpmElementList, BpmElemPlane, BpmElem
+from custom.bessyii.ophyd.bact_bessy_ophyd.devices.raw.bpm import BPM as BPMR
 
 
 def read_orbit_data():
@@ -34,8 +34,8 @@ def read_orbit_data():
     # retrieved_bpm_list = bpm_configuration.get_bpm_configuration()
     # bpm_config_data_as_data_frame = pd.DataFrame(retrieved_bpm_list.bpmConfigList)
     df = pd.DataFrame(tmp)
-    # return df
-    return bpm_config_data_as_data_frame
+    return df
+    # return bpm_config_data_as_data_frame
 
 
 @functools.lru_cache(maxsize=1)
@@ -51,7 +51,7 @@ def bpm_config_data():
     # ref_orbit = pd.DataFrame()
 
     import pandas as pd
-    
+
     return pd.DataFrame(read_orbit_data()).rename(columns={"ds": "s"})
 
     raise ValueError("remove me please")
@@ -239,7 +239,7 @@ if __name__ == "__main__":
     # )
     #initialize RE  and insert into DB using count plan (
     RE = RunEngine({})
-    db = catalog["heavy"]
+    db = catalog["heavy_local"]
     RE.subscribe(db.v1.insert)
     print("# ---- end data ")
     RE(count([bpm],3))
