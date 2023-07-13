@@ -1,0 +1,9 @@
+numpy
+pandas
+mongodb
+poetry
+ophyd>=1.6
+jsons
+
+# dedicated bact packages
+bact_bessyii_mls_ophyd
