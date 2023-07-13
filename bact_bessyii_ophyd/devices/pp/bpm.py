@@ -10,9 +10,9 @@ from bluesky.plans import count
 from bact_bessyii_mls_ophyd.devices.process.bpm_packed_data import packed_data_to_named_array
 import functools
 from ophyd import Component as Cpt, Signal, Kind
-from custom.bessyii.ophyd.bact_bessy_ophyd.devices.pp import bpm_configuration
-from custom.bessyii.ophyd.bact_bessy_ophyd.devices.pp.bpmElem import BpmElementList, BpmElemPlane, BpmElem
-from custom.bessyii.ophyd.bact_bessy_ophyd.devices.raw.bpm import BPM as BPMR
+from . import bpm_configuration
+from .bpmElem import BpmElementList, BpmElemPlane, BpmElem
+from ..raw.bpm import BPM as BPMR
 
 
 def read_orbit_data():

@@ -3,13 +3,13 @@ requires = [ "poetry-core>=1.0.0",]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
-name = "bact-mls-ophyd"
+name = "bact_bessyii_ophyd"
 version = "0.0.1"
-description = "Ophyd devices for metrology light source."
+description = "Ophyd devices for Bessy II  light source."
 authors = [ "Pierre Schnizer", "Waheedullah Sulaiman Khail"]
 license = "GPL-3.0"
 homepage = ""
-repository = "https://github.com/hz-b/bact-mls-ophyd"
+repository = "https://github.com/hz-b/bact-bessyii-ophyd"
 keywords = []
 
 [tool.poetry.dependencies]
