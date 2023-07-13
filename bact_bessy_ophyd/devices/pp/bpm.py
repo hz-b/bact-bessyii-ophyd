@@ -8,10 +8,11 @@ from databroker import catalog
 from bluesky.plans import count
 
 from bact_bessyii_mls_ophyd.devices.process.bpm_packed_data import packed_data_to_named_array
-from bact_mls_ophyd.devices.raw.bpm import BPM as BPMR
-from bact_mls_ophyd.devices.pp.bpmElem import BpmElementList, BpmElemPlane, BpmElem
 import functools
 from ophyd import Component as Cpt, Signal, Kind
+from custom.bessyii.ophyd.bact_bessy_ophyd.devices.pp import bpm_configuration
+from custom.bessyii.ophyd.bact_bessy_ophyd.devices.pp.bpmElem import BpmElementList, BpmElemPlane, BpmElem
+from custom.bessyii.ophyd.bact_bessy_ophyd.devices.raw.bpm import BPM as BPMR
 
 
 def read_orbit_data():
@@ -29,8 +30,12 @@ def read_orbit_data():
     # return mls_data.bpm_offsets()
     # TODO:
     tmp =bpm_parameters.create_bpm_config()
+    # TODO: uncommit below two lines once discussed with Pierre
+    # retrieved_bpm_list = bpm_configuration.get_bpm_configuration()
+    # bpm_config_data_as_data_frame = pd.DataFrame(retrieved_bpm_list.bpmConfigList)
     df = pd.DataFrame(tmp)
     return df
+    # return bpm_config_data_as_data_frame
 
 
 @functools.lru_cache(maxsize=1)
@@ -38,13 +43,20 @@ def bpm_config_data():
     """
 
     Todo:
-        make this hack a transparent access
-        find appropriate way to store it
+         Remove it from here please
     """
+    # BESSY II style
+    # bpm_data = mml_bpm_data.reindex(columns=columns + ["offset_x", "offset_y"])
+    # ref_orbit = read_orbit_data()
+    # ref_orbit = pd.DataFrame()
 
-    from pyml import mlsinit
     import pandas as pd
+
+    return pd.DataFrame(read_orbit_data()).rename(columns={"ds": "s"})
+
+    raise ValueError("remove me please")
     import numpy as np
+    from pyml import mlsinit
 
     columns = [
         "name",
@@ -78,12 +90,6 @@ def bpm_config_data():
         bpm_data = bpm_data.infer_objects()
         return bpm_data
 
-    # BESSY II style
-    # bpm_data = mml_bpm_data.reindex(columns=columns + ["offset_x", "offset_y"])
-    # ref_orbit = read_orbit_data()
-    # ref_orbit = pd.DataFrame()
-
-    return pd.DataFrame(read_orbit_data()).rename(columns={"ds": "s"})
 
 class BPM(BPMR):
     """
@@ -137,8 +143,9 @@ class BPM(BPMR):
         #  todo: rec = recievable... or?
         rec = bpm_config_data()
         self.ds.put(rec.s.values)
-        indices = rec.idx.values - 1
-        self.configure(dict(names=rec.loc[:, "name"].values, indices=indices, n_valid_bpms=len(rec.idx.values)))
+        indices = rec.idx.values
+        #: todo fix number of bpms  for machine and twin
+        self.configure(dict(names=rec.loc[:, "name"].values, indices=indices, n_valid_bpms=123))#len(123)))#rec.idx.values)))
         return
 
     #
@@ -170,13 +177,30 @@ class BPM(BPMR):
         bpm_element_list = BpmElementList()
         n_channels = 8
         signal_name = self.name + "_packed_data"
-        bpm_packed_data_chunks = np.transpose(np.reshape(data[signal_name]['value'], (n_channels, -1)))
-        bpm_packed_data_chunks = bpm_packed_data_chunks[:self.n_valid_bpms.get()]
-        for chunk, name in zip(bpm_packed_data_chunks, self.names.get()):
-            bpm_elem_plane_x = BpmElemPlane(chunk[0], chunk[1])
-            bpm_elem_plane_y = BpmElemPlane(chunk[2], chunk[3])
-            bpm_elem = BpmElem(x=bpm_elem_plane_x, y=bpm_elem_plane_y, intensity_z=chunk[4], intensity_s=chunk[5],
-                               stat=chunk[6], gain_raw=chunk[7], name=name)
+        # get rid of the empty data first before reshaping
+        # todo: that's the bessy ii world, perhaps to dispose them already when reading them?
+        # todo: ask colleagues to adjust the .NORD parameter?
+        # todo: check that only zeros are discarded?
+        data_buffer = data[signal_name]['value'][:1024]
+        bpm_packed_data_chunks = np.transpose(np.reshape(data_buffer, (n_channels, -1)))
+        # only take the bpm's which are valid
+        bpm_packed_data_chunks = bpm_packed_data_chunks[self.indices.get()]
+
+        # todo: get names and index correct in reading bpm data
+        names_to_use = list(self.names.get()) #+ [f'bpmz_added:{cnt}' for cnt in range(14)]
+        # ensure that zip does not finish premature
+        assert len(names_to_use) == len(bpm_packed_data_chunks)
+        # todo: check the order of chunks in packed data. already acheived by sorting the data chunks?
+        for chunk, name in zip(bpm_packed_data_chunks, names_to_use):
+            # todo: is that the correct order at the machine
+            # bpm_elem_plane_x = BpmElemPlane(chunk[0], chunk[1])
+            # bpm_elem_plane_y = BpmElemPlane(chunk[2], chunk[3])
+            # todo: thats how the twin puts into the packed data
+            #       needs to follow the machine
+            bpm_elem_plane_x = BpmElemPlane(chunk[0], chunk[6])
+            bpm_elem_plane_y = BpmElemPlane(chunk[1], chunk[7])
+            bpm_elem = BpmElem(x=bpm_elem_plane_x, y=bpm_elem_plane_y, intensity_z=chunk[2], intensity_s=chunk[3],
+                               stat=chunk[4], gain_raw=chunk[5], name=name)
             bpm_element_list.add_bpm_elem(bpm_elem)
         bpm_data = {self.name + "_elem_data": bpm_element_list.to_dict(data['bpm_packed_data']['timestamp'])}
         data.update(BpmElementList().to_json(bpm_data))
@@ -215,7 +239,7 @@ if __name__ == "__main__":
     # )
     #initialize RE  and insert into DB using count plan (
     RE = RunEngine({})
-    db = catalog["heavy"]
+    db = catalog["heavy_local"]
     RE.subscribe(db.v1.insert)
     print("# ---- end data ")
     RE(count([bpm],3))
