@@ -3,16 +3,13 @@
 import numpy as np
 import pandas as pd
 from bact2.ophyd.devices.process import bpm_parameters
-from bluesky import RunEngine
-from databroker import catalog
-from bluesky.plans import count
 
 from bact_bessyii_mls_ophyd.devices.process.bpm_packed_data import packed_data_to_named_array
 import functools
 from ophyd import Component as Cpt, Signal, Kind
-from custom.bessyii.ophyd.bact_bessy_ophyd.devices.pp import bpm_configuration
-from custom.bessyii.ophyd.bact_bessy_ophyd.devices.pp.bpmElem import BpmElementList, BpmElemPlane, BpmElem
-from custom.bessyii.ophyd.bact_bessy_ophyd.devices.raw.bpm import BPM as BPMR
+from . import bpm_configuration
+from .bpmElem import BpmElementList, BpmElemPlane, BpmElem
+from ..raw.bpm import BPM as BPMR
 
 
 def read_orbit_data():
@@ -209,6 +206,10 @@ class BPM(BPMR):
 
 
 if __name__ == "__main__":
+    from bluesky import RunEngine
+    from databroker import catalog
+    from bluesky.plans import count
+
     # print("#--------")
     # print(bpm_config_data().dtypes)
 
