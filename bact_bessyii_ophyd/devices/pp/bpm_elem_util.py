@@ -1,13 +1,62 @@
 import logging
 from typing import Sequence, Hashable
+from collections import OrderedDict
 
 import numpy as np
 import xarray as xr
 
-from bact_analysis_bessyii.bba.analysis_model import FitReadyOrbit
+# from bact_analysis_bessyii.bba.analysis_model import MeasuredValues, MeasuredItem
 from bact_bessyii_ophyd.devices.pp.bpmElem import BpmElem
 
 logger = logging.getLogger("bact-analysis-bessyii")
+
+
+# def bpm_data_extract_measurement(item):
+#        try:
+#             x_pos_raw = item["x"]["pos_raw"]
+#             x_rms_raw = item["x"]["rms_raw"]
+#             y_pos_raw = item["y"]["pos_raw"]
+#             y_rms_raw = item["y"]["rms_raw"]
+#        except KeyError as ex:
+#             logger.error(f"Failed to treat item {item}: {ex}")
+#             raise ex
+#        return  MeasuredItem(value=x_pos_raw, rms=x_rms_raw), MeasuredItem(value=y_pos_raw, rms=y_rms_raw)
+
+
+# def extract_bpm_data_to_flat_structure(data_for_one_magnet: Sequence[Sequence[BpmElem]]) -> Sequence[MeasuredValues]:
+#     """
+#     Todo:
+#         return it as numpy array with named columns ... quite close to an xarray then
+#     """
+#
+#     def one_measurement_to_data_model(one_measurement):
+#         x = []
+#         y = []
+#         for one_bpm_data in one_measurement:
+#             name = one_bpm_data['name']
+#             xtmp, ytmp = extract_data(one_bpm_data)
+#             x.append((name, xtmp))
+#             y.append((name, ytmp))
+#
+#         return MeasuredValues(data=OrderedDict(x)), MeasuredValues(data=OrderedDict(y))
+
+    # tmp = [
+    #
+    #     for one_measurement in data_for_one_magnet.bpm_elem_data.values
+    # ]
+    # r = [bpm_elem_util.extract_data(one_bpm) for one_bpm in data_for_one_magnet.bpm_elem_data[0]]
+
+    # extract names of the bpm ... take first one as reference
+    # todo: make it a separate function
+    # get the bpm names from first line
+    # bpm_names = np.array(tmp[0].keys())
+    # # check that they are the same in each: too paranoic?
+    # for c in tmp[1:]:
+    #     check = np.array(c.keys())
+    #     assert ((bpm_names == check).all())
+    #
+    # # all good ... make a flat structure
+    # return [[items for _, items in one_measurement.items()] for one_measurement in tmp]
 
 
 def extract_data(item):
@@ -20,29 +69,6 @@ def extract_data(item):
         logger.error(f"Failed to treat item {item}: {ex}")
         raise ex
     return ([x_pos_raw, x_rms_raw], [y_pos_raw, y_rms_raw])
-
-def extract_bpm_data_to_flat_structure(data_for_one_magnet: Sequence[Sequence[BpmElem]]) -> Sequence[Sequence[FitReadyOrbit]]:
-    """
-    Todo:
-        return it as numpy array with named columns ... quite close to an xarray then
-    """
-    tmp = [
-        {one_bpm_data['name']: extract_data(one_bpm_data) for one_bpm_data in one_measurement}
-        for one_measurement in data_for_one_magnet.bpm_elem_data.values
-    ]
-    # r = [bpm_elem_util.extract_data(one_bpm) for one_bpm in data_for_one_magnet.bpm_elem_data[0]]
-
-    # extract names of the bpm ... take first one as reference
-    # todo: make it a separate function
-    # get the bpm names from first line
-    bpm_names = np.array(tmp[0].keys())
-    # check that they are the same in each: too paranoic?
-    for c in tmp[1:]:
-        check = np.array(c.keys())
-        assert ((bpm_names == check).all())
-
-    # all good ... make a flat structure
-    return [[items for _, items in one_measurement.items()] for one_measurement in tmp]
 
 def bpm_to_dataset(read_data: Sequence[Hashable]) -> xr.DataArray:
     """
