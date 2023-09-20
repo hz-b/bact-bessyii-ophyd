@@ -181,7 +181,7 @@ class BPM(BPMR):
         data_buffer = data[signal_name]['value'][:1024]
         bpm_packed_data_chunks = np.transpose(np.reshape(data_buffer, (n_channels, -1)))
         # only take the bpm's which are valid
-        bpm_packed_data_chunks = bpm_packed_data_chunks[self.indices.get()]
+        bpm_packed_data_chunks = bpm_packed_data_chunks[self.indices.get() ] # -1 ]
 
         # todo: get names and index correct in reading bpm data
         names_to_use = list(self.names.get()) #+ [f'bpmz_added:{cnt}' for cnt in range(14)]

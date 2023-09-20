@@ -55,7 +55,11 @@ def read_from_file_insert_in_database(file_path):
         # Convert x_state and y_state to boolean
         bpm_dict['x_state'] = bool(int(bpm_dict['x_state']))
         bpm_dict['y_state'] = bool(int(bpm_dict['y_state']))
-
+        # Convert ds, idx, x_scale, and y_scale to appropriate data types
+        bpm_dict['ds'] = float(bpm_dict['ds'])
+        bpm_dict['idx'] = int(bpm_dict['idx'])
+        bpm_dict['x_scale'] = float(bpm_dict['x_scale'])
+        bpm_dict['y_scale'] = float(bpm_dict['y_scale'])
         # Add BPMZ offset values from second file
         bpm_dict['x_offset'], bpm_dict['y_offset'] = get_offset_values(bpm_dict['name'])
 

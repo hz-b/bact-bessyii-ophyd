@@ -13,7 +13,7 @@ from custom.lat2db.controller import machine_controller
 app = FastAPI()
 config = dotenv_values("../.env")
 app.include_router(bpm_element_controller.router, tags=["bpmelements"], prefix="/bpmelem")
-app.mongodb_client = MongoClient("mongodb://localhost:27017/")
+app.mongodb_client = MongoClient("mongodb://127.0.0.1:27017/")
 app.database = app.mongodb_client["bessyii"]
 
 logger = logging.getLogger("bact")
