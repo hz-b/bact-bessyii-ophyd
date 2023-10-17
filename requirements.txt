@@ -1,6 +1,6 @@
 numpy
 pandas
-mongodb
+pymongo
 poetry
 ophyd>=1.6
 jsons
