@@ -41,6 +41,8 @@ def bpm_config_data():
 
     Todo:
          Remove it from here please
+
+    flake8 complains about it too
     """
     # BESSY II style
     # bpm_data = mml_bpm_data.reindex(columns=columns + ["offset_x", "offset_y"])
@@ -83,9 +85,10 @@ def bpm_config_data():
             index=columns, data=mlsinit.bpm, dtype=object
         ).T.set_index("name")
 
-        bpm_data = mml_bpm_data.merge(ref_orbit, left_index=True, right_index=True)
-        bpm_data = bpm_data.infer_objects()
-        return bpm_data
+        # dead code: flake8 will complain
+        # bpm_data = mml_bpm_data.merge(ref_orbit, left_index=True, right_index=True)
+        # bpm_data = bpm_data.infer_objects()
+        # return bpm_data
 
 
 class BPM(BPMR):
@@ -249,6 +252,3 @@ if __name__ == "__main__":
     run =db[-1]
     print(run.metadata['stop'])
     data = run.primary.read()
-
-
-
