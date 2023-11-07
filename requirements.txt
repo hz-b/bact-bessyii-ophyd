@@ -6,4 +6,5 @@ ophyd>=1.6
 jsons
 
 # dedicated bact packages
+pyepics
 bact_bessyii_mls_ophyd

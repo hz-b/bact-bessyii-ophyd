@@ -184,7 +184,9 @@ class BPM(BPMR):
         data_buffer = data[signal_name]['value'][:1024]
         bpm_packed_data_chunks = np.transpose(np.reshape(data_buffer, (n_channels, -1)))
         # only take the bpm's which are valid
-        bpm_packed_data_chunks = bpm_packed_data_chunks[self.indices.get() ] # -1 ]
+        # cross checked with bact2
+        # todo: cross check with control system
+        bpm_packed_data_chunks = bpm_packed_data_chunks[self.indices.get() -1]
 
         # todo: get names and index correct in reading bpm data
         names_to_use = list(self.names.get()) #+ [f'bpmz_added:{cnt}' for cnt in range(14)]
@@ -220,6 +222,7 @@ if __name__ == "__main__":
     # mlsinit.bpm
     # how to combine it with the BPM test of the raw type
     prefix = "Pierre:DT:"
+    prefix = ""
     # bpm = BPM("BPMZ1X003GP", name="bpm")
     bpm = BPM(prefix + "MDIZ2T5G", name="bpm")
     if not bpm.connected:
@@ -243,12 +246,12 @@ if __name__ == "__main__":
     # )
     #initialize RE  and insert into DB using count plan (
     RE = RunEngine({})
-    db = catalog["heavy_local"]
-    RE.subscribe(db.v1.insert)
+    # db = catalog["heavy_local"]
+    # RE.subscribe(db.v1.insert)
     print("# ---- end data ")
     RE(count([bpm],3))
 
     # read back from database
-    run =db[-1]
-    print(run.metadata['stop'])
-    data = run.primary.read()
+    # run =db[-1]
+    # print(run.metadata['stop'])
+    # data = run.primary.read()
