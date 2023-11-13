@@ -3,13 +3,12 @@ from typing import Sequence
 from ophyd import (
     Device,
     EpicsSignal,
-    PVPositionerPC,
+    PVPositionerPC
 )
 from ophyd.device import DynamicDeviceComponent as DDC
 
-import quadrupoles
+from bact_bessyii_ophyd.devices.pp.quadrupoles import quadrupole_names
 from bact_bessyii_mls_ophyd.devices.utils import reached_setpoint
-
 t_super = PVPositionerPC
 t_super = reached_setpoint.ReachedSetpointEPS
 
@@ -23,7 +22,7 @@ class MultiplexerPCWrapper(Device):
     pcs = DDC(
         {
             name: (EpicsSignal, ":" + name, dict(put_complete=True))
-            for name in quadrupoles
+            for name in quadrupole_names
         },
         doc="the multiplexer power converter selector pvs",
         default_read_attrs=(),

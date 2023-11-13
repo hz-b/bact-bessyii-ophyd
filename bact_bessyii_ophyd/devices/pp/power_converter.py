@@ -1,15 +1,16 @@
-import sys
-import threading
-import time
-
 import numpy as np
 from bact_bessyii_mls_ophyd.devices.utils import reached_setpoint
-from ophyd import (Component as Cpt, Device, EpicsSignal, EpicsSignalRO, Kind, PVPositionerPC, Signal, )
+from ophyd import (
+    Component as Cpt,
+    EpicsSignal,
+    EpicsSignalRO,
+    Kind,
+    PVPositionerPC,
+    Signal,
+)
 
-from ophyd.device import DynamicDeviceComponent as DDC, Component
-from ophyd.status import AndStatus, SubscriptionStatus, Status
+from ophyd.status import AndStatus, Status
 
-from bact_mls_ophyd.devices.pp.selected_multiplexer import MultiplexerSelector
 
 t_super = PVPositionerPC
 t_super = reached_setpoint.ReachedSetpointEPS
@@ -29,7 +30,9 @@ class MultiplexerPowerConverter(t_super):
     no_error = Cpt(EpicsSignalRO, ":stat2", kind=Kind.omitted)
 
     #: current that is small enough that switch off can be made
-    tolerable_zero_current = Cpt(Signal, name="tolerable_error", value=20e-3, kind=Kind.config)
+    tolerable_zero_current = Cpt(
+        Signal, name="tolerable_error", value=20e-3, kind=Kind.config
+    )
 
     #: acceptable relative error
     eps_rel = Cpt(Signal, name="eps_rel", value=6e-2, kind=Kind.config)
@@ -60,7 +63,10 @@ class MultiplexerPowerConverter(t_super):
 
         stat = AndStatus(stat1, stat2)
         txt = (
-                txt + f" status {stat} settle time {stat.settle_time} stat2 {stat2}" + " settle time {stat2.settle_time}")
+            txt
+            + f" status {stat} settle time {stat.settle_time} stat2 {stat2}"
+            + " settle time {stat2.settle_time}"
+        )
         self.log.info(txt)
         return stat
 
@@ -77,7 +83,9 @@ class MultiplexerPowerConverter(t_super):
         try:
             self._setToZero()
         except Exception as exc:
-            self.log.error(f"Failed to switch of {cls_name}(name={name}): reason({exc})")
+            self.log.error(
+                f"Failed to switch of {cls_name}(name={name}): reason({exc})"
+            )
 
     def isOff(self):
         value = self.readback.get()
@@ -98,14 +106,15 @@ class MultiplexerPowerConverter(t_super):
         self.setToZero()
 
     def stage(self):
-
         val = self.status.get()
         if not val:
             self.log.warning(f"Muxer power converter off! val = {val} still trying")
 
         val = self.no_error.get()
         if not val:
-            self.log.warning(f"Muxer power converter signals error val = {val}, still trying")
+            self.log.warning(
+                f"Muxer power converter signals error val = {val}, still trying"
+            )
 
         super().stage()
 

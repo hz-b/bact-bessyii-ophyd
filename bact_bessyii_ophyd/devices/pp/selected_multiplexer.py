@@ -1,10 +1,11 @@
 import threading
 import time
 
-from bact2.ophyd.devices.raw.multiplexer_state_machine import MuxerState
-from bact2.ophyd.devices.raw.quad_list import quadrupoles
+from bact_bessyii_mls_ophyd.devices.utils.multiplexer_state_machine import MuxerState
 from ophyd import (Component as Cpt, EpicsSignal, EpicsSignalRO, Kind, PVPositionerPC, Signal, )
 from ophyd.status import AndStatus, SubscriptionStatus, Status
+
+from bact_bessyii_ophyd.devices.pp.quadrupoles import quadrupole_names
 
 _muxer_off = "Mux OFF"
 _request_off = "Off"
@@ -201,7 +202,7 @@ class MultiplexerSelector(_t_super):
                 fmt = "Expected that device is selected {} but found device {}"
                 raise AssertionError(fmt.format(selected_device_name, val))
 
-            num = quadrupoles.index(val)
+            num = quadrupole_names.index(val)
             self.log.info("Storing last set to {} as num {}".format(val, num))
             self.setpoint.put(val)
             self.log.debug(f" selected {selected_device_name} state {self.state_machine.state}")
@@ -292,9 +293,9 @@ class MultiplexerSelector(_t_super):
             num = -1
         else:
             try:
-                num = quadrupoles.index(value)
+                num = quadrupole_names.index(value)
             except Exception as exc:
-                self.log.error(f"Trying to lookup {value} in sequence {quadrupoles}")
+                self.log.error(f"Trying to lookup {value} in sequence {quadrupole_names}")
                 raise exc
 
         self.setpoint.put(value)

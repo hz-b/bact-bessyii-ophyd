@@ -159,5 +159,4 @@ q1 = [
     "Q1M2T8R",
 ]
 
-quadrupoles = q4 + q5 + q1 + q2 + q3
-quadrupoles = [name.lower() for name in quadrupoles]
+quadrupole_names = q4 + q5 + q1 + q2 + q3
