@@ -5,7 +5,6 @@ from ophyd.status import SubscriptionStatus
 
 
 class BPM(Device):
-    #packed_data = Cpt(EpicsSignalRO, ":rdBufBpm")
     packed_data = Cpt(EpicsSignalRO, ":bdata")
     count = Cpt(EpicsSignalRO, ":count")
     timeout = Cpt(Signal, name="timeout", value=3, kind=Kind.config)
@@ -23,7 +22,6 @@ def test_bpm():
     """pytest compatible
     """
     prefix = "Pierre:DT:"
-    #bpm = BPM("BPMZ1X003GP", name="bpm")
     bpm = BPM(prefix + "MDIZ2T5G", name="bpm")
     if not bpm.connected:
         bpm.wait_for_connection()
