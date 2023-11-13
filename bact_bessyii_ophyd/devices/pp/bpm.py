@@ -2,7 +2,7 @@
 """
 import numpy as np
 import pandas as pd
-from bact2.ophyd.devices.process import bpm_parameters
+from .bpm_parameters import create_bpm_config
 
 from bact_bessyii_mls_ophyd.devices.process.bpm_packed_data import packed_data_to_named_array
 import functools
@@ -26,7 +26,7 @@ def read_orbit_data():
     # from pyml import mls_data
     # return mls_data.bpm_offsets()
     # TODO:
-    tmp =bpm_parameters.create_bpm_config()
+    tmp = create_bpm_config()
     # TODO: uncommit below two lines once discussed with Pierre
     # retrieved_bpm_list = bpm_configuration.get_bpm_configuration()
     # bpm_config_data_as_data_frame = pd.DataFrame(retrieved_bpm_list.bpmConfigList)
