@@ -1,11 +1,7 @@
 from typing import Sequence
-
-import ophyd.status
-from bact2.ophyd.devices.utils import signal_with_validation, ReachedSetPoint
 from ophyd import (
     Component as Cpt,
-    Device,
-    PVPositionerPC
+    Device
 )
 
 from .multiplexer_wrapper import MultiplexerPCWrapper

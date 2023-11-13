@@ -1,63 +1,163 @@
-from bact_bessyii_mls_ophyd.devices.utils.power_converters_as_multiplexer import (
-    ScaledPowerConverter,
-    SelectedPowerConverter,
-    MultiplexerSetMixin,
-)
-
-from ophyd.areadetector.base import ad_group
-from ophyd import Component as Cpt, Device, Kind, Signal
-from ophyd.device import DynamicDeviceComponent as DDC
-
-
-quad_prefixes_q1 = [
-    # First short
-    "Q1P1K1RP",
-    "Q1P2K1RP",
-    # second: long
-    "Q1P1L2RP",
-    "Q1P2L2RP",
-    # Third short
-    "Q1P1K3RP",
-    "Q1P2K3RP",
-    # Forth long
-    "Q1P1L4RP",
-    "Q1P2L4RP",
+q4 = [
+    "Q4M1D1R",
+    "Q4M1D2R",
+    "Q4M1D3R",
+    "Q4M1D4R",
+    "Q4M1D5R",
+    "Q4M1D6R",
+    "Q4M1D7R",
+    "Q4M1D8R",
+    "Q4M1T1R",
+    "Q4M1T2R",
+    "Q4M1T3R",
+    "Q4M1T4R",
+    "Q4M1T5R",
+    "Q4M1T6R",
+    "Q4M1T7R",
+    "Q4M1T8R",
+    "Q4M2D1R",
+    "Q4M2D2R",
+    "Q4M2D3R",
+    "Q4M2D4R",
+    "Q4M2D5R",
+    "Q4M2D6R",
+    "Q4M2D7R",
+    "Q4M2D8R",
+    "Q4M2T1R",
+    "Q4M2T2R",
+    "Q4M2T3R",
+    "Q4M2T4R",
+    "Q4M2T5R",
+    "Q4M2T6R",
+    "Q4M2T7R",
+    "Q4M2T8R",
 ]
 
-quad_prefixes_q2 = [name.replace("Q1", "Q2") for name in quad_prefixes_q1]
-quad_prefixes_q3 = [name.replace("Q1", "Q3") for name in quad_prefixes_q1]
-quad_prefixes = quad_prefixes_q1 + quad_prefixes_q2 + quad_prefixes_q3
+q2 = [
+    "Q2M1D1R",
+    "Q2M1D2R",
+    "Q2M1D3R",
+    "Q2M1D4R",
+    "Q2M1D5R",
+    "Q2M1D6R",
+    "Q2M1D7R",
+    "Q2M1D8R",
+    "Q2M1T1R",
+    "Q2M1T2R",
+    "Q2M1T3R",
+    "Q2M1T4R",
+    "Q2M1T5R",
+    "Q2M1T6R",
+    "Q2M1T7R",
+    "Q2M1T8R",
+    "Q2M2D1R",
+    "Q2M2D2R",
+    "Q2M2D3R",
+    "Q2M2D4R",
+    "Q2M2D5R",
+    "Q2M2D6R",
+    "Q2M2D7R",
+    "Q2M2D8R",
+    "Q2M2T1R",
+    "Q2M2T2R",
+    "Q2M2T3R",
+    "Q2M2T4R",
+    "Q2M2T5R",
+    "Q2M2T6R",
+    "Q2M2T7R",
+    "Q2M2T8R",
+]
 
-t_quads = [(name.lower(), name) for name in quad_prefixes]
-quad_names = [elem[0] for elem in t_quads]
+q3 = [
+    "Q3M1D1R",
+    "Q3M1D2R",
+    "Q3M1D3R",
+    "Q3M1D4R",
+    "Q3M1D5R",
+    "Q3M1D6R",
+    "Q3M1D7R",
+    "Q3M1D8R",
+    "Q3M1T1R",
+    "Q3M1T2R",
+    "Q3M1T3R",
+    "Q3M1T4R",
+    "Q3M1T5R",
+    "Q3M1T6R",
+    "Q3M1T7R",
+    "Q3M1T8R",
+    "Q3M2D1R",
+    "Q3M2D2R",
+    "Q3M2D3R",
+    "Q3M2D4R",
+    "Q3M2D5R",
+    "Q3M2D6R",
+    "Q3M2D7R",
+    "Q3M2D8R",
+    "Q3M2T1R",
+    "Q3M2T2R",
+    "Q3M2T3R",
+    "Q3M2T4R",
+    "Q3M2T5R",
+    "Q3M2T6R",
+    "Q3M2T7R",
+    "Q3M2T8R",
+]
+
+q5 = [
+    "Q5M1T1R",
+    "Q5M1T2R",
+    "Q5M1T3R",
+    "Q5M1T4R",
+    "Q5M1T5R",
+    "Q5M1T6R",
+    "Q5M1T7R",
+    "Q5M1T8R",
+    "Q5M2T1R",
+    "Q5M2T2R",
+    "Q5M2T3R",
+    "Q5M2T4R",
+    "Q5M2T5R",
+    "Q5M2T6R",
+    "Q5M2T7R",
+    "Q5M2T8R",
+]
 
 
-class QuadrupolesCollection(Device, MultiplexerSetMixin):
-    """
+q1 = [
+    "Q1M1D1R",
+    "Q1M1D2R",
+    "Q1M1D3R",
+    "Q1M1D4R",
+    "Q1M1D5R",
+    "Q1M1D6R",
+    "Q1M1D7R",
+    "Q1M1D8R",
+    "Q1M1T1R",
+    "Q1M1T2R",
+    "Q1M1T3R",
+    "Q1M1T4R",
+    "Q1M1T5R",
+    "Q1M1T6R",
+    "Q1M1T7R",
+    "Q1M1T8R",
+    "Q1M2D1R",
+    "Q1M2D2R",
+    "Q1M2D4R",
+    # this quadrupole was fixed
+    "Q1M2D3R",
+    "Q1M2D5R",
+    "Q1M2D6R",
+    "Q1M2D7R",
+    "Q1M2D8R",
+    "Q1M2T1R",
+    "Q1M2T2R",
+    "Q1M2T3R",
+    "Q1M2T4R",
+    "Q1M2T5R",
+    "Q1M2T6R",
+    "Q1M2T7R",
+    "Q1M2T8R",
+]
 
-    Todo:
-        Belongs to the multiplexer
-    """
-
-    power_converters = DDC(
-        ad_group(ScaledPowerConverter, t_quads, kind=Kind.normal, lazy=False),
-        doc="all quadrupoless ",
-        default_read_attrs=(),
-    )
-
-    power_converter_names = Cpt(
-        Signal, name="quad_names", value=quad_names, kind=Kind.config
-    )
-
-    sel = Cpt(SelectedPowerConverter, name="sel_pc")
-
-    _default_config_attrs = ("quad_names",)
-    _default_read_attrs = ("sel",)
-
-
-if __name__ == "__main__":
-    qc = QuadrupolesCollection(name="qc")
-    if not qc.connected:
-        qc.wait_for_connection()
-
-    print(qc.read())
+quadrupoles = q4 + q5 + q1 + q2 + q3
+quadrupoles = [name.lower() for name in quadrupoles]
