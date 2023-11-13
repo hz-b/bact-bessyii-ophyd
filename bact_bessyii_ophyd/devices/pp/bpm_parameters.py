@@ -41,7 +41,7 @@ def create_bpm_config():
                   a mapping from raw_value to physics_value.
     '''
 
-    t_names = ['name', 'x_state', 'y_state',  'ds',      'idx']
+    t_names = ['name', 'x_state', 'y_state',  's',      'idx']
     formats = ['U20',   np.bool_,  np.bool_,   np.float_, np.int_]
     t_names += ['x_scale', 'y_scale', 'x_offset', 'y_offset']
     formats += [np.float_, np.float_,  np.float_,  np.float_]
@@ -82,9 +82,9 @@ def create_bpm_config():
     assert(sum(reduced_bpms['x_state']) == reduced_bpms.shape[0])
     assert(sum(reduced_bpms['x_state']) == reduced_bpms.shape[0])
 
-    ds_sort = np.argsort(reduced_bpms['ds'])
-    sorted_bpms = np.take(reduced_bpms, ds_sort)
-    del ds_sort
+    s_sort = np.argsort(reduced_bpms['s'])
+    sorted_bpms = np.take(reduced_bpms, s_sort)
+    del s_sort
     del reduced_bpms
 
     # data start counting at one ... need to use count at zero
