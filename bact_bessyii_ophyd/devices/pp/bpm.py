@@ -181,7 +181,9 @@ class BPM(BPMR):
         data_buffer = data[signal_name]['value'][:1024]
         bpm_packed_data_chunks = np.transpose(np.reshape(data_buffer, (n_channels, -1)))
         # only take the bpm's which are valid
-        bpm_packed_data_chunks = bpm_packed_data_chunks[self.indices.get() ] # -1 ]
+        # minus one is significant: indices are still starting from one
+        # need to be shifted here
+        bpm_packed_data_chunks = bpm_packed_data_chunks[self.indices.get() -1 ]
 
         # todo: get names and index correct in reading bpm data
         names_to_use = list(self.names.get()) #+ [f'bpmz_added:{cnt}' for cnt in range(14)]
@@ -226,6 +228,8 @@ if __name__ == "__main__":
     data = bpm.read()
     print("# ---- data")
     print(data['bpm_elem_data']['value'])
+    print("# ---- end data ")
+
     # md = dict(
     #     machine="MLS",
     #     nickname="bpm_test",
@@ -242,13 +246,9 @@ if __name__ == "__main__":
     RE = RunEngine({})
     db = catalog["heavy_local"]
     RE.subscribe(db.v1.insert)
-    print("# ---- end data ")
     RE(count([bpm],3))
 
     # read back from database
     run =db[-1]
     print(run.metadata['stop'])
     data = run.primary.read()
-
-
-
