@@ -6,4 +6,4 @@ ophyd>=1.6
 jsons
 
 # dedicated bact packages
-bact_bessyii_mls_ophyd
+bact-device-models
