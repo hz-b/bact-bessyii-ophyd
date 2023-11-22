@@ -15,9 +15,8 @@ import sys
 import bluesky.plans as bp
 from databroker import catalog
 
-from bact_mls_ophyd.devices.pp import bpm
-from bact_mls_ophyd.devices.pp.multiplexer import Multiplexer, MultiplexerPCWrapper, MultiplexerSelector, \
-    MultiplexerPowerConverter
+from bact_bessyii_ophyd.devices.pp import bpm
+from bact_bessyii_ophyd.devices.pp.multiplexer import Multiplexer
 
 
 def main():

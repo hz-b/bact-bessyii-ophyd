@@ -10,7 +10,7 @@ from ophyd.status import AndStatus, SubscriptionStatus
 
 
 class TuneChannel(Device):
-    freq = FC(EpicsSignalRO, "{self.prefix}:meas{self.plane}")
+    freq = FC(EpicsSignalRO, "{self.prefix}:rd{self.plane}")
     timeout = Cpt(Signal, name="timeout", value=3, kind=Kind.config)
 
     def __init__(self, prefix, *, plane: str = None, **kwargs):
@@ -32,9 +32,9 @@ class Tunes(Device):
     Todo:
        Learn handling prefixes for TuneChannel properly!
     """
-    x = Cpt(TuneChannel, "", name="x", plane="X")
-    y = Cpt(TuneChannel, "", name="y", plane="Y")
-    z = Cpt(TuneChannel, "", name="z", plane="Z")
+    x = Cpt(TuneChannel, "", name="x", plane="H")
+    y = Cpt(TuneChannel, "", name="y", plane="V")
+    # z = Cpt(TuneChannel, "", name="z", plane="Z")
 
     #def trigger(self):
     #    return AndStatus(

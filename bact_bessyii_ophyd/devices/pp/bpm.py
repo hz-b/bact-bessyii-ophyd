@@ -1,38 +1,14 @@
 """BPM preprocessed data
 """
 import numpy as np
-import pandas as pd
 from .bpm_parameters import create_bpm_config
 
 from bact_bessyii_mls_ophyd.devices.process.bpm_packed_data import packed_data_to_named_array
 import functools
 from ophyd import Component as Cpt, Signal, Kind
-from . import bpm_configuration
-from .bpmElem import BpmElementList, BpmElemPlane, BpmElem
+from bact_device_models.devices.bpm_elem import BpmElementList, BpmElemPlane, BpmElem
 from ..raw.bpm import BPM as BPMR
 
-
-def read_orbit_data():
-    """
-    todo:
-        need to retrieve data from a database
-        refactor name ... it is rather reading configuration / calibration data for
-        the raw orbit data
-
-    Returns:
-
-    How nice if one uses MML. Doing in f77 style is a good excuse for building up technical debt.
-    """
-    # from pyml import mls_data
-    # return mls_data.bpm_offsets()
-    # TODO:
-    tmp = create_bpm_config()
-    # TODO: uncommit below two lines once discussed with Pierre
-    # retrieved_bpm_list = bpm_configuration.get_bpm_configuration()
-    # bpm_config_data_as_data_frame = pd.DataFrame(retrieved_bpm_list.bpmConfigList)
-    df = pd.DataFrame(tmp)
-    return df
-    # return bpm_config_data_as_data_frame
 
 
 @functools.lru_cache(maxsize=1)
@@ -44,52 +20,11 @@ def bpm_config_data():
 
     flake8 complains about it too
     """
-    # BESSY II style
-    # bpm_data = mml_bpm_data.reindex(columns=columns + ["offset_x", "offset_y"])
-    # ref_orbit = read_orbit_data()
-    # ref_orbit = pd.DataFrame()
-
     import pandas as pd
 
-    return pd.DataFrame(read_orbit_data()).rename(columns={"ds": "s"})
-
-    raise ValueError("remove me please")
-    import numpy as np
-    from pyml import mlsinit
-
-    columns = [
-        "name",
-        # x plane
-        "read_x",
-        "x_active",
-        # y plane
-        "read_y",
-        "y_active",
-        # infos
-        "family",
-        "num",
-        "s",
-        # index into the vector
-        "idx",
-        #
-        "unknown_a",
-        #
-        "unknown_b",
-        #
-    ]
-
-
-    if False:
-        # MLS data
-        mml_bpm_data = pd.DataFrame(
-            index=columns, data=mlsinit.bpm, dtype=object
-        ).T.set_index("name")
-
-        # dead code: flake8 will complain
-        # bpm_data = mml_bpm_data.merge(ref_orbit, left_index=True, right_index=True)
-        # bpm_data = bpm_data.infer_objects()
-        # return bpm_data
-
+    tmp = create_bpm_config()
+    df = pd.DataFrame(tmp)
+    return df
 
 class BPM(BPMR):
     """
