@@ -1,10 +1,10 @@
 import json
 from dataclasses import dataclass, asdict
-from bact_bessyii_mls_ophyd.db.mongo_repository import MongoDBConnector
-# Create a MongoDBConnector instance
-db_connector = MongoDBConnector()
+from bact_bessyii_mls_ophyd.db.mongo_repository import InitializeMongo
+# Create a InitializeMongo instance
+db_init = InitializeMongo()
 # Get the collection you need
-collection = db_connector.get_collection("calib.factor")
+collection = db_init.get_collection("calib.factor")
 @dataclass
 class CalibrationFactor:
     Family: dict
