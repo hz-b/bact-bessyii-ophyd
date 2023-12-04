@@ -1,37 +1,68 @@
 """
 """
-from ophyd import Component as Cpt, Device, EpicsSignalRO, Kind, Signal
-from ophyd.status import SubscriptionStatus
+from ophyd import Component as Cpt, Device, EpicsSignalRO, EpicsSignal, Kind, Signal
+from ophyd.status import SubscriptionStatus, AndStatus
+from threading import Event
 
-
-class BPM(Device):
-    packed_data = Cpt(EpicsSignalRO, ":bdata")
-    count = Cpt(EpicsSignalRO, ":count")
-    timeout = Cpt(Signal, name="timeout", value=3, kind=Kind.config)
+class BPMPlane(Device):
+    """One plane (x, or y)"""
+    pos = Cpt(EpicsSignalRO, ":pos")
+    rms = Cpt(EpicsSignalRO, ":rms")
 
     def trigger(self):
+        """ensure all data are new
+
+        emitted from a single ioc: waiting to use p4p
+        """
         def cb(**kwargs):
             """new data here"""
             return True
 
-        timeout = self.timeout.get()
-        return SubscriptionStatus(self.packed_data, cb, run=False, timeout=timeout)
+        timeout = self.parent.timeout.get()
+
+        return AndStatus(
+            SubscriptionStatus(self.pos, cb, run=False, timeout=timeout),
+            SubscriptionStatus(self.rms, cb, run=False, timeout=timeout)
+        )
+
+class BPMConfig(Device):
+    """
+
+    Todo:
+        make all signals readonly
+    """
+    names = Cpt(EpicsSignal, ":names", kind=Kind.config)
+    s = Cpt(EpicsSignal, ":s", kind=Kind.config)
+    
+class BPM(Device):
+    x = Cpt(BPMPlane, ":x")
+    y = Cpt(BPMPlane, ":y")
+    cfg = Cpt(BPMConfig, ":par")
+    count = Cpt(EpicsSignalRO, ":im:count")
+    timeout = Cpt(Signal, name="timeout", value=3, kind=Kind.config)
+
+    def trigger(self):
+        return AndStatus(self.x.trigger(), self.y.trigger())
 
 
 def test_bpm():
     """pytest compatible
     """
     prefix = "Pierre:DT:"
-    bpm = BPM(prefix + "MDIZ2T5G", name="bpm")
+    bpm = BPM(prefix + "bpm", name="bpm")
     if not bpm.connected:
         bpm.wait_for_connection()
 
     print(bpm.read_configuration())
+    return
     stat = bpm.trigger()
     stat.wait(3)
     data = bpm.read()
-    bpm_data = data["bpm_packed_data"]["value"]
+    print(data)
+    bpm_data = data["bpm_x_rms"]["value"]
     print(bpm_data)
+    bpm_names = data["bpm_names"]["value"]
+    print(bpm_names)
 
 
 if __name__ == "__main__":

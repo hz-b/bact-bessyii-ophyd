@@ -43,45 +43,15 @@ class BPM(BPMR):
         todo: rewrite this comment after discussing with Pierre
     """
 
-    #  @Member n_valid_bpms out of n_elements these are only active....
-    #  todo: why set this on the model level?
-    n_valid_bpms = Cpt(Signal, name="n_valid_bpms", value=-1, kind=Kind.config)
-    # n_valid_bpms = Cpt(Signal, name="n_valid_bpms", value=255, kind=Kind.config)
-
-    #  @Member ds: position of the beam position monitor at the longitudinal coordinate
-    #  A component is a descriptor representing a device component (or signal)
-    ds = Cpt(Signal, name="ds", value=np.nan )  # kind=Kind.config
-    #  @Member indices a signal which determines the index .... what is inside indices
-    indices = Cpt(Signal, name="indices", value=np.nan, kind=Kind.config)
-    names = Cpt(Signal, name="names", value=np.nan, kind=Kind.config)
-
     #  a constructor for BPM
     #  **kwargs / **args...  passed an unspecified number of arguments to to the constructor.
     #  We should know what are we passing to a constructor, todo don't we?
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.standardConfiguration()
 
     def stage(self):
-        assert(self.n_valid_bpms.get() > 0)
         super().stage()
-
-    # member function standardConfiguration
-    #  todo: explain what we should be doing in this function
-    def standardConfiguration(self):
-        """
-
-        Todo:
-            make this hack a transparent access
-        """
-        #  todo: rec = recievable... or?
-        rec = bpm_config_data()
-        self.ds.put(rec.s.values)
-        indices = rec.idx.values
-        #: todo fix number of bpms  for machine and twin
-        self.configure(dict(names=rec.loc[:, "name"].values, indices=indices, n_valid_bpms=123))#len(123)))#rec.idx.values)))
-        return
 
     #
     def splitPackedData(self, data_dic):
@@ -111,37 +81,24 @@ class BPM(BPMR):
         data = super().read()
         bpm_element_list = BpmElementList()
         n_channels = 8
-        signal_name = self.name + "_packed_data"
-        # get rid of the empty data first before reshaping
-        # todo: that's the bessy ii world, perhaps to dispose them already when reading them?
-        # todo: ask colleagues to adjust the .NORD parameter?
-        # todo: check that only zeros are discarded?
-        data_buffer = data[signal_name]['value'][:1024]
-        bpm_packed_data_chunks = np.transpose(np.reshape(data_buffer, (n_channels, -1)))
-        # only take the bpm's which are valid
-        # minus one is significant: indices are still starting from one
-        # need to be shifted here
-        bpm_packed_data_chunks = bpm_packed_data_chunks[self.indices.get() -1 ]
 
-        # todo: get names and index correct in reading bpm data
-        names_to_use = list(self.names.get()) #+ [f'bpmz_added:{cnt}' for cnt in range(14)]
-        # ensure that zip does not finish premature
-        assert len(names_to_use) == len(bpm_packed_data_chunks)
-        # todo: check the order of chunks in packed data. already acheived by sorting the data chunks?
-        for chunk, name in zip(bpm_packed_data_chunks, names_to_use):
-            # todo: is that the correct order at the machine
-            # bpm_elem_plane_x = BpmElemPlane(chunk[0], chunk[1])
-            # bpm_elem_plane_y = BpmElemPlane(chunk[2], chunk[3])
-            # todo: thats how the twin puts into the packed data
-            #       needs to follow the machine
-            bpm_elem_plane_x = BpmElemPlane(chunk[0], chunk[6])
-            bpm_elem_plane_y = BpmElemPlane(chunk[1], chunk[7])
-            bpm_elem = BpmElem(x=bpm_elem_plane_x, y=bpm_elem_plane_y, intensity_z=chunk[2], intensity_s=chunk[3],
-                               stat=chunk[4], gain_raw=chunk[5], name=name)
+        xp = data[self.name + '_x_pos']['value']
+        yp = data[self.name + '_y_pos']['value']
+        xr = data[self.name + '_x_rms']['value']
+        yr = data[self.name + '_y_rms']['value']
+        names = self.cfg.names.get()
+        
+        for name, xpi, ypi, xri, zri in zip(names, xp, yp, xr, yr):
+            if not name:
+                continue
+            bpm_elem_plane_x = BpmElemPlane(xpi, xri)
+            bpm_elem_plane_y = BpmElemPlane(ypi, zri)
+            bpm_elem = BpmElem(x=bpm_elem_plane_x, y=bpm_elem_plane_y,
+                               intensity_z=7, intensity_s=5,
+                               stat=3, gain_raw=1, name=name)
             bpm_element_list.add_bpm_elem(bpm_elem)
-        bpm_data = {self.name + "_elem_data": bpm_element_list.to_dict(data['bpm_packed_data']['timestamp'])}
+        bpm_data = {self.name + "_elem_data": bpm_element_list.to_dict(data['bpm_count']['timestamp'])}
         data.update(BpmElementList().to_json(bpm_data))
-        del data[signal_name]
         return data
 
 
@@ -158,14 +115,33 @@ if __name__ == "__main__":
     # how to combine it with the BPM test of the raw type
     prefix = "Pierre:DT:"
     # bpm = BPM("BPMZ1X003GP", name="bpm")
-    bpm = BPM(prefix + "MDIZ2T5G", name="bpm")
+    bpm = BPM(prefix + "bpm", name="bpm")
+    
+
     if not bpm.connected:
         bpm.wait_for_connection()
+
+    print(bpm.describe_configuration())
+
+    def put_config():
+        rec = bpm_config_data()
+        # should also go to database
+        indices = rec.idx.values
+        # that should go away ...
+        print(rec.loc[:, ["name", "idx", "s"]])
+        print(rec.columns)
+        names = np.zeros(128, 'U20')
+        names[rec.idx.values] = rec.loc[:, "name"].values
+        s_pos = np.zeros(128, float) -1 # np.nan
+        s_pos[rec.idx.values] = rec.s.values
+        bpm.cfg.configure(dict(names=names, s=s_pos))
+
+    put_config()
     stat = bpm.trigger()
     stat.wait(3)
     data = bpm.read()
     print("# ---- data")
-    print(data['bpm_elem_data']['value'])
+    print(data['bpm_x_pos']['value'])
     print("# ---- end data ")
 
     # md = dict(
@@ -182,8 +158,8 @@ if __name__ == "__main__":
     # )
     #initialize RE  and insert into DB using count plan (
     RE = RunEngine({})
-    db = catalog["heavy_local"]
-    RE.subscribe(db.v1.insert)
+    # db = catalog["heavy_local"]
+    # RE.subscribe(db.v1.insert)
     RE(count([bpm],3))
 
     # read back from database
