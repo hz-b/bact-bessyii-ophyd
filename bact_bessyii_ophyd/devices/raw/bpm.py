@@ -25,6 +25,18 @@ class BPMPlane(Device):
             SubscriptionStatus(self.rms, cb, run=False, timeout=timeout)
         )
 
+
+class BPMIntensity(Device):
+    z = Cpt(EpicsSignalRO, ":z")
+    s = Cpt(EpicsSignalRO, ":s")
+
+
+class BPMRawData(Device):
+    """some data that seems to be direct from internals ..."""
+    stat = Cpt(EpicsSignalRO, ":stat")
+    gain = Cpt(EpicsSignalRO, ":gain")
+
+
 class BPMConfig(Device):
     """
 
@@ -33,10 +45,13 @@ class BPMConfig(Device):
     """
     names = Cpt(EpicsSignal, ":names", kind=Kind.config)
     s = Cpt(EpicsSignal, ":s", kind=Kind.config)
-    
+
+
 class BPM(Device):
     x = Cpt(BPMPlane, ":x")
     y = Cpt(BPMPlane, ":y")
+    intensity = Cpt(BPMIntensity, ":intensity")
+    raw = Cpt(BPMRawData, ":raw")
     cfg = Cpt(BPMConfig, ":par")
     count = Cpt(EpicsSignalRO, ":im:count")
     timeout = Cpt(Signal, name="timeout", value=3, kind=Kind.config)

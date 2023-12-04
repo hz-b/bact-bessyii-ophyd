@@ -50,31 +50,15 @@ class BPM(BPMR):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-    def stage(self):
-        super().stage()
-
-    #
-    def splitPackedData(self, data_dic):
-        """
-        @Params: data_dict: data dictionary in a ... format
-        this method will split the packed data into ...
-        """
-        pd = data_dic[self.name + '_packed_data']
-        timestamp = pd["timestamp"]
-        r = packed_data_to_named_array(pd["value"], n_elements=self.n_elements, indices=self.indices.get())
-        d2 = {self.name + "_" + key: dict(value=r[key], timestamp=timestamp) for key, val in r.dtype.descr}
-        return d2
-
-    @functools.lru_cache(maxsize=1)
-    def dataForDescribe(self):
-        return self.splitPackedData(self.read())
-
     def describe(self):
         data = super().describe()
-        signal_name = self.name + "_packed_data"
+        # pack this data into this part
+        del data[self.name + "_x_pos"]
+        del data[self.name + "_y_pos"]
+        del data[self.name + "_x_rms"]
+        del data[self.name + "_y_rms"]
         bpm_data = {self.name + "_elem_data": BpmElementList().describe_dict()}
         data.update(bpm_data)
-        del data[signal_name]
         return data
 
     def read(self):
@@ -99,6 +83,12 @@ class BPM(BPMR):
             bpm_element_list.add_bpm_elem(bpm_elem)
         bpm_data = {self.name + "_elem_data": bpm_element_list.to_dict(data['bpm_count']['timestamp'])}
         data.update(BpmElementList().to_json(bpm_data))
+
+        # This data is now in bpm_data
+        del data[self.name + "_x_pos"]
+        del data[self.name + "_y_pos"]
+        del data[self.name + "_x_rms"]
+        del data[self.name + "_y_rms"]
         return data
 
 
@@ -141,7 +131,7 @@ if __name__ == "__main__":
     stat.wait(3)
     data = bpm.read()
     print("# ---- data")
-    print(data['bpm_x_pos']['value'])
+    print(data['bpm_elem_data']['value'])
     print("# ---- end data ")
 
     # md = dict(
