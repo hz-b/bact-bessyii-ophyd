@@ -1,5 +1,8 @@
 import logging
 
+from  bact_bessyii_mls_ophyd.devices.utils import power_converters_as_multiplexer
+print(power_converters_as_multiplexer)
+
 from bact_bessyii_mls_ophyd.devices.utils.power_converters_as_multiplexer import (
     MultiplexerSetMixin,
     ScaledPowerConverter,
@@ -37,7 +40,7 @@ def configure_scaling_power_converters(
         pc.configure(d)
 
 
-class SteererCollection(Device, MultiplexerSetMixin):
+class SteerersCollection(Device, MultiplexerSetMixin):
     """Steerers with scaling to value"""
 
     power_converters = DDC(
@@ -64,6 +67,9 @@ class SteererCollection(Device, MultiplexerSetMixin):
         super().__init__(*args, **kwargs)
         configure_scaling_power_converters(self.power_converters, repo)
 
+    def get_element_names(self):
+        return self.power_converter_names.get()
+
 
 if __name__ == "__main__":
-    steerer_muxer = SteererCollection(name="sc")
+    steerer_muxer = SteerersCollection(name="sc")

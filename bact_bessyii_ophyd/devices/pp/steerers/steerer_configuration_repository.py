@@ -22,7 +22,9 @@ class ConfigurationRepository(ConfigurationRepositoryInterface):
         return self.repo[device_id]
 
     def get_device_names(self) -> Sequence[str]:
+        return [name for name in self.repo.keys() if name[:3] != "VS4"]
         return list(self.repo.keys())
+
 
 if __name__ == "__main__":
     c = ConfigurationRepository()
