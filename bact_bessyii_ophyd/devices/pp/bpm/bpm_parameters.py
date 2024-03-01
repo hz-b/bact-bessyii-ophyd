@@ -1,7 +1,6 @@
 import numpy as np
 from . import bpm_config
 
-
 #: scale raw bpm bits to mm
 #: 10 mm equals 2**15
 bit_scale = 10/2**15

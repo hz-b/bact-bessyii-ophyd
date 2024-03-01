@@ -5,7 +5,7 @@ from ophyd import (
 )
 
 from .multiplexer_wrapper import MultiplexerPCWrapper
-from .power_converter import MultiplexerPowerConverter
+from ..power_converter import MultiplexerPowerConverter
 from .selected_multiplexer import MultiplexerSelector
 
 _muxer_off = "Mux OFF"

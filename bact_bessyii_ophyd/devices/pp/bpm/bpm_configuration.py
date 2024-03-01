@@ -106,4 +106,4 @@ if __name__ == '__main__':
     # # Print the retrieved BpmConfigList object
     # print(retrieved_bpm_list)
     # Read from file and insert into database
-    read_from_file_insert_in_database('configuration_data.txt')
+    read_from_file_insert_in_database('../quadrupole/configuration_data.txt')
