@@ -2,840 +2,840 @@
     "steerers": [
         {
             "conversion": {
-                "intercept": -9.972315000000148e-05,
+                "intercept": 0.0,
                 "slope": 0.08432849155
             },
             "name": "HS4P1D4R"
         },
         {
             "conversion": {
-                "intercept": 0.0006017898000000022,
+                "intercept": 0.0,
                 "slope": 0.0888893848
             },
             "name": "HS4P1D5R"
         },
         {
             "conversion": {
-                "intercept": 0.00011703575000000799,
+                "intercept": 0.0,
                 "slope": 0.17223353865000002
             },
             "name": "VS2P1D8R"
         },
         {
             "conversion": {
-                "intercept": -0.0003134281999999933,
+                "intercept": 0.0,
                 "slope": 0.1766493144
             },
             "name": "VS2P1D2R"
         },
         {
             "conversion": {
-                "intercept": -6.6832500000002515e-06,
+                "intercept": 0.0,
                 "slope": 0.20252887005
             },
             "name": "VS3P1T5R"
         },
         {
             "conversion": {
-                "intercept": -0.0003193201500000034,
+                "intercept": 0.0,
                 "slope": 0.09393325235
             },
             "name": "HS4P2D7R"
         },
         {
             "conversion": {
-                "intercept": -0.00015891619999999773,
+                "intercept": 0.0,
                 "slope": 0.1717955122
             },
             "name": "VS3P2D3R"
         },
         {
             "conversion": {
-                "intercept": -0.00031793824999999665,
+                "intercept": 0.0,
                 "slope": 0.17703131095000002
             },
             "name": "VS2P2D6R"
         },
         {
             "conversion": {
-                "intercept": 1.5157150000000286e-05,
+                "intercept": 0.0,
                 "slope": 0.18824629275
             },
             "name": "VS3P2T8R"
         },
         {
             "conversion": {
-                "intercept": -0.00019414570000000908,
+                "intercept": 0.0,
                 "slope": 0.1704728925
             },
             "name": "VS3P1D5R"
         },
         {
             "conversion": {
-                "intercept": 0.0003208722999999969,
+                "intercept": 0.0,
                 "slope": 0.0849614231
             },
             "name": "HS4P1T5R"
         },
         {
             "conversion": {
-                "intercept": 0.0005027291000000156,
+                "intercept": 0.0,
                 "slope": 0.270539595
             },
             "name": "VS4P2T6R"
         },
         {
             "conversion": {
-                "intercept": -0.0002521799500000005,
+                "intercept": 0.0,
                 "slope": 0.18102193435000002
             },
             "name": "VS2P1D4R"
         },
         {
             "conversion": {
-                "intercept": 5.9935849999998014e-05,
+                "intercept": 0.0,
                 "slope": 0.08397844035
             },
             "name": "HS4P1D8R"
         },
         {
             "conversion": {
-                "intercept": -0.00019361984999999304,
+                "intercept": 0.0,
                 "slope": 0.19459494375
             },
             "name": "VS3P2T4R"
         },
         {
             "conversion": {
-                "intercept": -0.00021094509999999844,
+                "intercept": 0.0,
                 "slope": 0.0990524317
             },
             "name": "HS4P1D7R"
         },
         {
             "conversion": {
-                "intercept": 0.000348167699999985,
+                "intercept": 0.0,
                 "slope": 0.4866614598
             },
             "name": "VS4P1T7R"
         },
         {
             "conversion": {
-                "intercept": 0.0003650866500000058,
+                "intercept": 0.0,
                 "slope": 0.07225020965000001
             },
             "name": "HS4P1D1R"
         },
         {
             "conversion": {
-                "intercept": -0.0002702535999999922,
+                "intercept": 0.0,
                 "slope": 0.179065157
             },
             "name": "VS2P2D8R"
         },
         {
             "conversion": {
-                "intercept": 0.0001756729000000068,
+                "intercept": 0.0,
                 "slope": 0.2831683171
             },
             "name": "VS4P2T1R"
         },
         {
             "conversion": {
-                "intercept": -2.7316549999999856e-05,
+                "intercept": 0.0,
                 "slope": 0.055784421249999994
             },
             "name": "HS1PD8R"
         },
         {
             "conversion": {
-                "intercept": -8.593484999999679e-05,
+                "intercept": 0.0,
                 "slope": 0.16227296375
             },
             "name": "VS3P2D7R"
         },
         {
             "conversion": {
-                "intercept": -0.0002902720999999886,
+                "intercept": 0.0,
                 "slope": 0.1901011631
             },
             "name": "VS2P1T8R"
         },
         {
             "conversion": {
-                "intercept": -0.00020058970000000342,
+                "intercept": 0.0,
                 "slope": 0.167069054
             },
             "name": "VS2P2D4R"
         },
         {
             "conversion": {
-                "intercept": -9.4190299999998e-05,
+                "intercept": 0.0,
                 "slope": 0.0811626349
             },
             "name": "HS4P1T3R"
         },
         {
             "conversion": {
-                "intercept": 6.51238500000012e-05,
+                "intercept": 0.0,
                 "slope": 0.18745288545
             },
             "name": "VS3P1T7R"
         },
         {
             "conversion": {
-                "intercept": 0.00043049619999999816,
+                "intercept": 0.0,
                 "slope": 0.0994093758
             },
             "name": "HS4P2D5R"
         },
         {
             "conversion": {
-                "intercept": 0.0004867026500000038,
+                "intercept": 0.0,
                 "slope": 0.08565815015
             },
             "name": "HS4P1T1R"
         },
         {
             "conversion": {
-                "intercept": -9.201289999999362e-05,
+                "intercept": 0.0,
                 "slope": 0.1920347804
             },
             "name": "VS3P2T3R"
         },
         {
             "conversion": {
-                "intercept": -0.00017411434999999725,
+                "intercept": 0.0,
                 "slope": 0.08315998405
             },
             "name": "HS4P2D2R"
         },
         {
             "conversion": {
-                "intercept": 0.0003679018000000006,
+                "intercept": 0.0,
                 "slope": 0.0747682225
             },
             "name": "HS4P2D1R"
         },
         {
             "conversion": {
-                "intercept": 0.0005918098999999899,
+                "intercept": 0.0,
                 "slope": 0.3712145365
             },
             "name": "VS4P1T6R"
         },
         {
             "conversion": {
-                "intercept": 0.0003301102999999986,
+                "intercept": 0.0,
                 "slope": 0.07386009900000001
             },
             "name": "HS1PD7R"
         },
         {
             "conversion": {
-                "intercept": 6.698329999999669e-05,
+                "intercept": 0.0,
                 "slope": 0.099792081
             },
             "name": "HS4P2D3R"
         },
         {
             "conversion": {
-                "intercept": -4.388200000000203e-05,
+                "intercept": 0.0,
                 "slope": 0.0885394923
             },
             "name": "HS4P2T2R"
         },
         {
             "conversion": {
-                "intercept": -0.00019350359999999178,
+                "intercept": 0.0,
                 "slope": 0.186416032
             },
             "name": "VS2P1T2R"
         },
         {
             "conversion": {
-                "intercept": -0.00025868869999999544,
+                "intercept": 0.0,
                 "slope": 0.1700048299
             },
             "name": "VS3P2D2R"
         },
         {
             "conversion": {
-                "intercept": -0.00015984395000000207,
+                "intercept": 0.0,
                 "slope": 0.05907121295
             },
             "name": "HS1PT6R"
         },
         {
             "conversion": {
-                "intercept": -0.00027236055000000314,
+                "intercept": 0.0,
                 "slope": 0.18782023144999999
             },
             "name": "VS2P1T6R"
         },
         {
             "conversion": {
-                "intercept": -0.0005021471499999999,
+                "intercept": 0.0,
                 "slope": 0.10073207614999999
             },
             "name": "HS4P2T6R"
         },
         {
             "conversion": {
-                "intercept": -0.00026315329999999915,
+                "intercept": 0.0,
                 "slope": 0.17832193870000002
             },
             "name": "VS2P2T2R"
         },
         {
             "conversion": {
-                "intercept": 0.00027634480000000156,
+                "intercept": 0.0,
                 "slope": 0.0587153412
             },
             "name": "HS1PD6R"
         },
         {
             "conversion": {
-                "intercept": -0.0003759403999999966,
+                "intercept": 0.0,
                 "slope": 0.1840340009
             },
             "name": "VS2P1T5R"
         },
         {
             "conversion": {
-                "intercept": -0.00028198200000000007,
+                "intercept": 0.0,
                 "slope": 0.1713139399
             },
             "name": "VS3P2D5R"
         },
         {
             "conversion": {
-                "intercept": 0.0004594097500000005,
+                "intercept": 0.0,
                 "slope": 0.29742528235
             },
             "name": "VS4P1T1R"
         },
         {
             "conversion": {
-                "intercept": -0.00020317979999999458,
+                "intercept": 0.0,
                 "slope": 0.1895668156
             },
             "name": "VS3P2T2R"
         },
         {
             "conversion": {
-                "intercept": 0.0002859611499999998,
+                "intercept": 0.0,
                 "slope": 0.08710950795
             },
             "name": "HS4P2T4R"
         },
         {
             "conversion": {
-                "intercept": 0.00017745104999999928,
+                "intercept": 0.0,
                 "slope": 0.07873462805
             },
             "name": "HS4P1T2R"
         },
         {
             "conversion": {
-                "intercept": -0.0002537515500000004,
+                "intercept": 0.0,
                 "slope": 0.18566855965
             },
             "name": "VS3P2T7R"
         },
         {
             "conversion": {
-                "intercept": -0.00017175839999999942,
+                "intercept": 0.0,
                 "slope": 0.1849396039
             },
             "name": "VS2P1D1R"
         },
         {
             "conversion": {
-                "intercept": 0.00015310580000000434,
+                "intercept": 0.0,
                 "slope": 0.06905787669999999
             },
             "name": "HS4P2T7R"
         },
         {
             "conversion": {
-                "intercept": -0.00026318530000001006,
+                "intercept": 0.0,
                 "slope": 0.1708553191
             },
             "name": "VS2P2D2R"
         },
         {
             "conversion": {
-                "intercept": -0.00024811315000000667,
+                "intercept": 0.0,
                 "slope": 0.18710886445
             },
             "name": "VS2P1D7R"
         },
         {
             "conversion": {
-                "intercept": -0.0002463434500000021,
+                "intercept": 0.0,
                 "slope": 0.060195087849999995
             },
             "name": "HS1PT1R"
         },
         {
             "conversion": {
-                "intercept": -0.00028488399999999914,
+                "intercept": 0.0,
                 "slope": 0.0688970894
             },
             "name": "HS1PD5R"
         },
         {
             "conversion": {
-                "intercept": -0.00027901669999999545,
+                "intercept": 0.0,
                 "slope": 0.1696212573
             },
             "name": "VS2P2D5R"
         },
         {
             "conversion": {
-                "intercept": -6.587864999999665e-05,
+                "intercept": 0.0,
                 "slope": 0.08005229345
             },
             "name": "HS4P1T4R"
         },
         {
             "conversion": {
-                "intercept": -0.0001793501500000072,
+                "intercept": 0.0,
                 "slope": 0.17650688065
             },
             "name": "VS2P2D3R"
         },
         {
             "conversion": {
-                "intercept": 0.0003425264000000011,
+                "intercept": 0.0,
                 "slope": 0.0805290127
             },
             "name": "HS4P2T3R"
         },
         {
             "conversion": {
-                "intercept": 0.0003925536999999993,
+                "intercept": 0.0,
                 "slope": 0.0877433171
             },
             "name": "HS4P2D4R"
         },
         {
             "conversion": {
-                "intercept": 0.00020683935000000153,
+                "intercept": 0.0,
                 "slope": 0.07213916675
             },
             "name": "HS1PT3R"
         },
         {
             "conversion": {
-                "intercept": -0.00021847049999999812,
+                "intercept": 0.0,
                 "slope": 0.1804146762
             },
             "name": "VS3P1D7R"
         },
         {
             "conversion": {
-                "intercept": 0.00027136469999999857,
+                "intercept": 0.0,
                 "slope": 0.0846592664
             },
             "name": "HS4P1T8R"
         },
         {
             "conversion": {
-                "intercept": -0.00021403990000000428,
+                "intercept": 0.0,
                 "slope": 0.0817482482
             },
             "name": "HS4P2T5R"
         },
         {
             "conversion": {
-                "intercept": -8.336239999999495e-05,
+                "intercept": 0.0,
                 "slope": 0.1736937609
             },
             "name": "VS3P2D1R"
         },
         {
             "conversion": {
-                "intercept": -0.00014332165000000008,
+                "intercept": 0.0,
                 "slope": 0.17484686505
             },
             "name": "VS2P2T5R"
         },
         {
             "conversion": {
-                "intercept": 0.00021572474999999314,
+                "intercept": 0.0,
                 "slope": 0.18512938034999998
             },
             "name": "VS2P1T3R"
         },
         {
             "conversion": {
-                "intercept": 0.0001777921499999946,
+                "intercept": 0.0,
                 "slope": 0.19498353675
             },
             "name": "VS2P2T6R"
         },
         {
             "conversion": {
-                "intercept": 0.0001422223499999986,
+                "intercept": 0.0,
                 "slope": 0.07210056075
             },
             "name": "HS1PT7R"
         },
         {
             "conversion": {
-                "intercept": -0.001051253249999995,
+                "intercept": 0.0,
                 "slope": 0.47553466495
             },
             "name": "VS4P2T7R"
         },
         {
             "conversion": {
-                "intercept": -5.650239999999834e-05,
+                "intercept": 0.0,
                 "slope": 0.0612915293
             },
             "name": "HS1PD4R"
         },
         {
             "conversion": {
-                "intercept": 0.00011099535000000382,
+                "intercept": 0.0,
                 "slope": 0.17621467975
             },
             "name": "VS3P1D3R"
         },
         {
             "conversion": {
-                "intercept": 0.0004356026999999818,
+                "intercept": 0.0,
                 "slope": 0.2821088443
             },
             "name": "VS4P1T2R"
         },
         {
             "conversion": {
-                "intercept": -0.00011742669999999927,
+                "intercept": 0.0,
                 "slope": 0.0563907309
             },
             "name": "HS1PD2R"
         },
         {
             "conversion": {
-                "intercept": 0.0001607056999999995,
+                "intercept": 0.0,
                 "slope": 0.0851291454
             },
             "name": "HS4P1D6R"
         },
         {
             "conversion": {
-                "intercept": -0.0003381532500000006,
+                "intercept": 0.0,
                 "slope": 0.19615894465
             },
             "name": "VS3P1T3R"
         },
         {
             "conversion": {
-                "intercept": -0.0003093261499999972,
+                "intercept": 0.0,
                 "slope": 0.19538460845
             },
             "name": "VS3P2T1R"
         },
         {
             "conversion": {
-                "intercept": -8.275199999999844e-05,
+                "intercept": 0.0,
                 "slope": 0.0835010252
             },
             "name": "HS4P1T7R"
         },
         {
             "conversion": {
-                "intercept": -0.00018304060000000344,
+                "intercept": 0.0,
                 "slope": 0.1748686747
             },
             "name": "VS3P1D4R"
         },
         {
             "conversion": {
-                "intercept": 0.0002458288499999975,
+                "intercept": 0.0,
                 "slope": 0.08855872584999999
             },
             "name": "HS4P2D6R"
         },
         {
             "conversion": {
-                "intercept": -0.00016819334999999824,
+                "intercept": 0.0,
                 "slope": 0.19341630435
             },
             "name": "VS3P1T2R"
         },
         {
             "conversion": {
-                "intercept": 4.245100000008217e-06,
+                "intercept": 0.0,
                 "slope": 0.18273203529999998
             },
             "name": "VS2P2T3R"
         },
         {
             "conversion": {
-                "intercept": -0.00012444629999999735,
+                "intercept": 0.0,
                 "slope": 0.1607776788
             },
             "name": "VS2P2D7R"
         },
         {
             "conversion": {
-                "intercept": -0.00027866794999999167,
+                "intercept": 0.0,
                 "slope": 0.18806142775
             },
             "name": "VS3P1D1R"
         },
         {
             "conversion": {
-                "intercept": -4.1098300000000365e-05,
+                "intercept": 0.0,
                 "slope": 0.172402605
             },
             "name": "VS2P1T7R"
         },
         {
             "conversion": {
-                "intercept": -0.00013485724999999504,
+                "intercept": 0.0,
                 "slope": 0.17147923685
             },
             "name": "VS3P1D8R"
         },
         {
             "conversion": {
-                "intercept": -0.00017119944999999248,
+                "intercept": 0.0,
                 "slope": 0.17904481405
             },
             "name": "VS3P1D2R"
         },
         {
             "conversion": {
-                "intercept": -0.000274500600000005,
+                "intercept": 0.0,
                 "slope": 0.1728108629
             },
             "name": "VS3P2D4R"
         },
         {
             "conversion": {
-                "intercept": -7.572455000000311e-05,
+                "intercept": 0.0,
                 "slope": 0.17739217205000002
             },
             "name": "VS2P2T1R"
         },
         {
             "conversion": {
-                "intercept": -0.00013880994999999896,
+                "intercept": 0.0,
                 "slope": 0.18391373125
             },
             "name": "VS3P1T1R"
         },
         {
             "conversion": {
-                "intercept": 7.756350000000245e-05,
+                "intercept": 0.0,
                 "slope": 0.0718359814
             },
             "name": "HS4P1T6R"
         },
         {
             "conversion": {
-                "intercept": -0.0002185740500000033,
+                "intercept": 0.0,
                 "slope": 0.17015088455
             },
             "name": "VS2P2T7R"
         },
         {
             "conversion": {
-                "intercept": -0.00020063570000000697,
+                "intercept": 0.0,
                 "slope": 0.2090220434
             },
             "name": "VS3P2T6R"
         },
         {
             "conversion": {
-                "intercept": -0.00021359695000000567,
+                "intercept": 0.0,
                 "slope": 0.17400027055
             },
             "name": "VS2P1D5R"
         },
         {
             "conversion": {
-                "intercept": -4.487774999999833e-05,
+                "intercept": 0.0,
                 "slope": 0.07375415085
             },
             "name": "HS4P2D8R"
         },
         {
             "conversion": {
-                "intercept": -0.00029736234999999667,
+                "intercept": 0.0,
                 "slope": 0.17870899745
             },
             "name": "VS3P2D6R"
         },
         {
             "conversion": {
-                "intercept": 0.00011432944999999195,
+                "intercept": 0.0,
                 "slope": 0.18090132015
             },
             "name": "VS3P1D6R"
         },
         {
             "conversion": {
-                "intercept": -0.00022368864999999793,
+                "intercept": 0.0,
                 "slope": 0.17868585635
             },
             "name": "VS3P2D8R"
         },
         {
             "conversion": {
-                "intercept": 9.561989999999979e-05,
+                "intercept": 0.0,
                 "slope": 0.057299320099999995
             },
             "name": "HS1PT2R"
         },
         {
             "conversion": {
-                "intercept": -4.8559550000000506e-05,
+                "intercept": 0.0,
                 "slope": 0.06351390635000001
             },
             "name": "HS1PT4R"
         },
         {
             "conversion": {
-                "intercept": -0.0001880967999999955,
+                "intercept": 0.0,
                 "slope": 0.1887435705
             },
             "name": "VS3P1T4R"
         },
         {
             "conversion": {
-                "intercept": -0.0001246455000000063,
+                "intercept": 0.0,
                 "slope": 0.2064515823
             },
             "name": "VS3P1T8R"
         },
         {
             "conversion": {
-                "intercept": -0.0003702952499999995,
+                "intercept": 0.0,
                 "slope": 0.09322552505
             },
             "name": "HS4P1D3R"
         },
         {
             "conversion": {
-                "intercept": -0.0002236829500000051,
+                "intercept": 0.0,
                 "slope": 0.08201357135000001
             },
             "name": "HS4P1D2R"
         },
         {
             "conversion": {
-                "intercept": -0.00029170700000000216,
+                "intercept": 0.0,
                 "slope": 0.0628115365
             },
             "name": "HS1PT5R"
         },
         {
             "conversion": {
-                "intercept": 1.044880000000692e-05,
+                "intercept": 0.0,
                 "slope": 0.1782878255
             },
             "name": "VS2P1D6R"
         },
         {
             "conversion": {
-                "intercept": 5.68788500000042e-05,
+                "intercept": 0.0,
                 "slope": 0.07529479005
             },
             "name": "HS4P2T1R"
         },
         {
             "conversion": {
-                "intercept": 0.00025812100000000004,
+                "intercept": 0.0,
                 "slope": 0.077031218
             },
             "name": "HS1PD3R"
         },
         {
             "conversion": {
-                "intercept": 9.24194000000017e-05,
+                "intercept": 0.0,
                 "slope": 0.1701909769
             },
             "name": "VS2P2D1R"
         },
         {
             "conversion": {
-                "intercept": 8.433834999999057e-05,
+                "intercept": 0.0,
                 "slope": 0.17212935625
             },
             "name": "VS2P1T1R"
         },
         {
             "conversion": {
-                "intercept": 3.165069999999659e-05,
+                "intercept": 0.0,
                 "slope": 0.1784112142
             },
             "name": "VS2P1T4R"
         },
         {
             "conversion": {
-                "intercept": 0.00043756375000000847,
+                "intercept": 0.0,
                 "slope": 0.27194146095000005
             },
             "name": "VS4P2T2R"
         },
         {
             "conversion": {
-                "intercept": -6.7009500000006494e-06,
+                "intercept": 0.0,
                 "slope": 0.05940366245
             },
             "name": "HS1PT8R"
         },
         {
             "conversion": {
-                "intercept": 0.00016585589999999761,
+                "intercept": 0.0,
                 "slope": 0.19682293680000001
             },
             "name": "VS3P1T6R"
         },
         {
             "conversion": {
-                "intercept": -4.324899999999521e-05,
+                "intercept": 0.0,
                 "slope": 0.1822318704
             },
             "name": "VS2P1D3R"
         },
         {
             "conversion": {
-                "intercept": -0.0002401804500000021,
+                "intercept": 0.0,
                 "slope": 0.17459198165
             },
             "name": "VS2P2T4R"
         },
         {
             "conversion": {
-                "intercept": 5.006515000000045e-05,
+                "intercept": 0.0,
                 "slope": 0.19059886965
             },
             "name": "VS3P2T5R"
         },
         {
             "conversion": {
-                "intercept": 0.00040875665000000144,
+                "intercept": 0.0,
                 "slope": 0.09244506934999999
             },
             "name": "HS4P2T8R"
         },
         {
             "conversion": {
-                "intercept": -0.00018075304999999944,
+                "intercept": 0.0,
                 "slope": 0.05733932925
             },
             "name": "HS1PD1R"
         },
         {
             "conversion": {
-                "intercept": -0.00016442899999999372,
+                "intercept": 0.0,
                 "slope": 0.17790743
             },
             "name": "VS2P2T8R"

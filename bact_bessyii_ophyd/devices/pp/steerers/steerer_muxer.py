@@ -1,4 +1,6 @@
+from __future__ import annotations
 import logging
+from typing import Sequence
 
 from  bact_bessyii_mls_ophyd.devices.utils import power_converters_as_multiplexer
 print(power_converters_as_multiplexer)
@@ -19,25 +21,17 @@ logger = logging.getLogger("bact-bessyii-ophyd")
 repo = ConfigurationRepository()
 
 
-def configure_scaling_power_converters(
-    power_converters, repository: ConfigurationRepositoryInterface
+def configure_scaling_power_converter(
+    power_converter, repository,
+    name: str
 ):
-    """set offset and scale for all power converters given by their names
+    try:
+        conf = repository.get(name)
+    except AttributeError as exc:
+        logger.warning("Could not retrieve configuration of device %s: reason: %s", name, exc)
+        raise exc
 
-    Args:
-        power_converters:
-        repository:
-    """
-    for name in repo.get_device_names():
-        conf = repo.get(name)
-        try:
-            pc = getattr(power_converters, name)
-        except AttributeError as exc:
-            logger.warning("Could not configure device %s: reason: %s", name, exc)
-            continue
-
-        d = dict(slope=conf.conversion.slope, offset=conf.conversion.intercept)
-        pc.configure(d)
+    power_converter.configure(dict(slope=conf.conversion.slope, offset=conf.conversion.intercept))
 
 
 class SteerersCollection(Device, MultiplexerSetMixin):
@@ -65,11 +59,15 @@ class SteerersCollection(Device, MultiplexerSetMixin):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        configure_scaling_power_converters(self.power_converters, repo)
+        for name in self.get_element_names():
+            pc = self.get_steerer_by_name(name)
+            configure_scaling_power_converter(pc, repo, name)
 
     def get_element_names(self):
         return self.power_converter_names.get()
 
+    def get_steerer_by_name(self, name: str):
+        return getattr(self.power_converters, name)
 
 if __name__ == "__main__":
     steerer_muxer = SteerersCollection(name="sc")
