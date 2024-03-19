@@ -1,0 +1,844 @@
+{
+    "steerers": [
+        {
+            "conversion": {
+                "intercept": 0.0,
+                "slope": 0.08432849155
+            },
+            "name": "HS4P1D4R"
+        },
+        {
+            "conversion": {
+                "intercept": 0.0,
+                "slope": 0.0888893848
+            },
+            "name": "HS4P1D5R"
+        },
+        {
+            "conversion": {
+                "intercept": 0.0,
+                "slope": 0.17223353865000002
+            },
+            "name": "VS2P1D8R"
+        },
+        {
+            "conversion": {
+                "intercept": 0.0,
+                "slope": 0.1766493144
+            },
+            "name": "VS2P1D2R"
+        },
+        {
+            "conversion": {
+                "intercept": 0.0,
+                "slope": 0.20252887005
+            },
+            "name": "VS3P1T5R"
+        },
+        {
+            "conversion": {
+                "intercept": 0.0,
+                "slope": 0.09393325235
+            },
+            "name": "HS4P2D7R"
+        },
+        {
+            "conversion": {
+                "intercept": 0.0,
+                "slope": 0.1717955122
+            },
+            "name": "VS3P2D3R"
+        },
+        {
+            "conversion": {
+                "intercept": 0.0,
+                "slope": 0.17703131095000002
+            },
+            "name": "VS2P2D6R"
+        },
+        {
+            "conversion": {
+                "intercept": 0.0,
+                "slope": 0.18824629275
+            },
+            "name": "VS3P2T8R"
+        },
+        {
+            "conversion": {
+                "intercept": 0.0,
+                "slope": 0.1704728925
+            },
+            "name": "VS3P1D5R"
+        },
+        {
+            "conversion": {
+                "intercept": 0.0,
+                "slope": 0.0849614231
+            },
+            "name": "HS4P1T5R"
+        },
+        {
+            "conversion": {
+                "intercept": 0.0,
+                "slope": 0.270539595
+            },
+            "name": "VS4P2T6R"
+        },
+        {
+            "conversion": {
+                "intercept": 0.0,
+                "slope": 0.18102193435000002
+            },
+            "name": "VS2P1D4R"
+        },
+        {
+            "conversion": {
+                "intercept": 0.0,
+                "slope": 0.08397844035
+            },
+            "name": "HS4P1D8R"
+        },
+        {
+            "conversion": {
+                "intercept": 0.0,
+                "slope": 0.19459494375
+            },
+            "name": "VS3P2T4R"
+        },
+        {
+            "conversion": {
+                "intercept": 0.0,
+                "slope": 0.0990524317
+            },
+            "name": "HS4P1D7R"
+        },
+        {
+            "conversion": {
+                "intercept": 0.0,
+                "slope": 0.4866614598
+            },
+            "name": "VS4P1T7R"
+        },
+        {
+            "conversion": {
+                "intercept": 0.0,
+                "slope": 0.07225020965000001
+            },
+            "name": "HS4P1D1R"
+        },
+        {
+            "conversion": {
+                "intercept": 0.0,
+                "slope": 0.179065157
+            },
+            "name": "VS2P2D8R"
+        },
+        {
+            "conversion": {
+                "intercept": 0.0,
+                "slope": 0.2831683171
+            },
+            "name": "VS4P2T1R"
+        },
+        {
+            "conversion": {
+                "intercept": 0.0,
+                "slope": 0.055784421249999994
+            },
+            "name": "HS1PD8R"
+        },
+        {
+            "conversion": {
+                "intercept": 0.0,
+                "slope": 0.16227296375
+            },
+            "name": "VS3P2D7R"
+        },
+        {
+            "conversion": {
+                "intercept": 0.0,
+                "slope": 0.1901011631
+            },
+            "name": "VS2P1T8R"
+        },
+        {
+            "conversion": {
+                "intercept": 0.0,
+                "slope": 0.167069054
+            },
+            "name": "VS2P2D4R"
+        },
+        {
+            "conversion": {
+                "intercept": 0.0,
+                "slope": 0.0811626349
+            },
+            "name": "HS4P1T3R"
+        },
+        {
+            "conversion": {
+                "intercept": 0.0,
+                "slope": 0.18745288545
+            },
+            "name": "VS3P1T7R"
+        },
+        {
+            "conversion": {
+                "intercept": 0.0,
+                "slope": 0.0994093758
+            },
+            "name": "HS4P2D5R"
+        },
+        {
+            "conversion": {
+                "intercept": 0.0,
+                "slope": 0.08565815015
+            },
+            "name": "HS4P1T1R"
+        },
+        {
+            "conversion": {
+                "intercept": 0.0,
+                "slope": 0.1920347804
+            },
+            "name": "VS3P2T3R"
+        },
+        {
+            "conversion": {
+                "intercept": 0.0,
+                "slope": 0.08315998405
+            },
+            "name": "HS4P2D2R"
+        },
+        {
+            "conversion": {
+                "intercept": 0.0,
+                "slope": 0.0747682225
+            },
+            "name": "HS4P2D1R"
+        },
+        {
+            "conversion": {
+                "intercept": 0.0,
+                "slope": 0.3712145365
+            },
+            "name": "VS4P1T6R"
+        },
+        {
+            "conversion": {
+                "intercept": 0.0,
+                "slope": 0.07386009900000001
+            },
+            "name": "HS1PD7R"
+        },
+        {
+            "conversion": {
+                "intercept": 0.0,
+                "slope": 0.099792081
+            },
+            "name": "HS4P2D3R"
+        },
+        {
+            "conversion": {
+                "intercept": 0.0,
+                "slope": 0.0885394923
+            },
+            "name": "HS4P2T2R"
+        },
+        {
+            "conversion": {
+                "intercept": 0.0,
+                "slope": 0.186416032
+            },
+            "name": "VS2P1T2R"
+        },
+        {
+            "conversion": {
+                "intercept": 0.0,
+                "slope": 0.1700048299
+            },
+            "name": "VS3P2D2R"
+        },
+        {
+            "conversion": {
+                "intercept": 0.0,
+                "slope": 0.05907121295
+            },
+            "name": "HS1PT6R"
+        },
+        {
+            "conversion": {
+                "intercept": 0.0,
+                "slope": 0.18782023144999999
+            },
+            "name": "VS2P1T6R"
+        },
+        {
+            "conversion": {
+                "intercept": 0.0,
+                "slope": 0.10073207614999999
+            },
+            "name": "HS4P2T6R"
+        },
+        {
+            "conversion": {
+                "intercept": 0.0,
+                "slope": 0.17832193870000002
+            },
+            "name": "VS2P2T2R"
+        },
+        {
+            "conversion": {
+                "intercept": 0.0,
+                "slope": 0.0587153412
+            },
+            "name": "HS1PD6R"
+        },
+        {
+            "conversion": {
+                "intercept": 0.0,
+                "slope": 0.1840340009
+            },
+            "name": "VS2P1T5R"
+        },
+        {
+            "conversion": {
+                "intercept": 0.0,
+                "slope": 0.1713139399
+            },
+            "name": "VS3P2D5R"
+        },
+        {
+            "conversion": {
+                "intercept": 0.0,
+                "slope": 0.29742528235
+            },
+            "name": "VS4P1T1R"
+        },
+        {
+            "conversion": {
+                "intercept": 0.0,
+                "slope": 0.1895668156
+            },
+            "name": "VS3P2T2R"
+        },
+        {
+            "conversion": {
+                "intercept": 0.0,
+                "slope": 0.08710950795
+            },
+            "name": "HS4P2T4R"
+        },
+        {
+            "conversion": {
+                "intercept": 0.0,
+                "slope": 0.07873462805
+            },
+            "name": "HS4P1T2R"
+        },
+        {
+            "conversion": {
+                "intercept": 0.0,
+                "slope": 0.18566855965
+            },
+            "name": "VS3P2T7R"
+        },
+        {
+            "conversion": {
+                "intercept": 0.0,
+                "slope": 0.1849396039
+            },
+            "name": "VS2P1D1R"
+        },
+        {
+            "conversion": {
+                "intercept": 0.0,
+                "slope": 0.06905787669999999
+            },
+            "name": "HS4P2T7R"
+        },
+        {
+            "conversion": {
+                "intercept": 0.0,
+                "slope": 0.1708553191
+            },
+            "name": "VS2P2D2R"
+        },
+        {
+            "conversion": {
+                "intercept": 0.0,
+                "slope": 0.18710886445
+            },
+            "name": "VS2P1D7R"
+        },
+        {
+            "conversion": {
+                "intercept": 0.0,
+                "slope": 0.060195087849999995
+            },
+            "name": "HS1PT1R"
+        },
+        {
+            "conversion": {
+                "intercept": 0.0,
+                "slope": 0.0688970894
+            },
+            "name": "HS1PD5R"
+        },
+        {
+            "conversion": {
+                "intercept": 0.0,
+                "slope": 0.1696212573
+            },
+            "name": "VS2P2D5R"
+        },
+        {
+            "conversion": {
+                "intercept": 0.0,
+                "slope": 0.08005229345
+            },
+            "name": "HS4P1T4R"
+        },
+        {
+            "conversion": {
+                "intercept": 0.0,
+                "slope": 0.17650688065
+            },
+            "name": "VS2P2D3R"
+        },
+        {
+            "conversion": {
+                "intercept": 0.0,
+                "slope": 0.0805290127
+            },
+            "name": "HS4P2T3R"
+        },
+        {
+            "conversion": {
+                "intercept": 0.0,
+                "slope": 0.0877433171
+            },
+            "name": "HS4P2D4R"
+        },
+        {
+            "conversion": {
+                "intercept": 0.0,
+                "slope": 0.07213916675
+            },
+            "name": "HS1PT3R"
+        },
+        {
+            "conversion": {
+                "intercept": 0.0,
+                "slope": 0.1804146762
+            },
+            "name": "VS3P1D7R"
+        },
+        {
+            "conversion": {
+                "intercept": 0.0,
+                "slope": 0.0846592664
+            },
+            "name": "HS4P1T8R"
+        },
+        {
+            "conversion": {
+                "intercept": 0.0,
+                "slope": 0.0817482482
+            },
+            "name": "HS4P2T5R"
+        },
+        {
+            "conversion": {
+                "intercept": 0.0,
+                "slope": 0.1736937609
+            },
+            "name": "VS3P2D1R"
+        },
+        {
+            "conversion": {
+                "intercept": 0.0,
+                "slope": 0.17484686505
+            },
+            "name": "VS2P2T5R"
+        },
+        {
+            "conversion": {
+                "intercept": 0.0,
+                "slope": 0.18512938034999998
+            },
+            "name": "VS2P1T3R"
+        },
+        {
+            "conversion": {
+                "intercept": 0.0,
+                "slope": 0.19498353675
+            },
+            "name": "VS2P2T6R"
+        },
+        {
+            "conversion": {
+                "intercept": 0.0,
+                "slope": 0.07210056075
+            },
+            "name": "HS1PT7R"
+        },
+        {
+            "conversion": {
+                "intercept": 0.0,
+                "slope": 0.47553466495
+            },
+            "name": "VS4P2T7R"
+        },
+        {
+            "conversion": {
+                "intercept": 0.0,
+                "slope": 0.0612915293
+            },
+            "name": "HS1PD4R"
+        },
+        {
+            "conversion": {
+                "intercept": 0.0,
+                "slope": 0.17621467975
+            },
+            "name": "VS3P1D3R"
+        },
+        {
+            "conversion": {
+                "intercept": 0.0,
+                "slope": 0.2821088443
+            },
+            "name": "VS4P1T2R"
+        },
+        {
+            "conversion": {
+                "intercept": 0.0,
+                "slope": 0.0563907309
+            },
+            "name": "HS1PD2R"
+        },
+        {
+            "conversion": {
+                "intercept": 0.0,
+                "slope": 0.0851291454
+            },
+            "name": "HS4P1D6R"
+        },
+        {
+            "conversion": {
+                "intercept": 0.0,
+                "slope": 0.19615894465
+            },
+            "name": "VS3P1T3R"
+        },
+        {
+            "conversion": {
+                "intercept": 0.0,
+                "slope": 0.19538460845
+            },
+            "name": "VS3P2T1R"
+        },
+        {
+            "conversion": {
+                "intercept": 0.0,
+                "slope": 0.0835010252
+            },
+            "name": "HS4P1T7R"
+        },
+        {
+            "conversion": {
+                "intercept": 0.0,
+                "slope": 0.1748686747
+            },
+            "name": "VS3P1D4R"
+        },
+        {
+            "conversion": {
+                "intercept": 0.0,
+                "slope": 0.08855872584999999
+            },
+            "name": "HS4P2D6R"
+        },
+        {
+            "conversion": {
+                "intercept": 0.0,
+                "slope": 0.19341630435
+            },
+            "name": "VS3P1T2R"
+        },
+        {
+            "conversion": {
+                "intercept": 0.0,
+                "slope": 0.18273203529999998
+            },
+            "name": "VS2P2T3R"
+        },
+        {
+            "conversion": {
+                "intercept": 0.0,
+                "slope": 0.1607776788
+            },
+            "name": "VS2P2D7R"
+        },
+        {
+            "conversion": {
+                "intercept": 0.0,
+                "slope": 0.18806142775
+            },
+            "name": "VS3P1D1R"
+        },
+        {
+            "conversion": {
+                "intercept": 0.0,
+                "slope": 0.172402605
+            },
+            "name": "VS2P1T7R"
+        },
+        {
+            "conversion": {
+                "intercept": 0.0,
+                "slope": 0.17147923685
+            },
+            "name": "VS3P1D8R"
+        },
+        {
+            "conversion": {
+                "intercept": 0.0,
+                "slope": 0.17904481405
+            },
+            "name": "VS3P1D2R"
+        },
+        {
+            "conversion": {
+                "intercept": 0.0,
+                "slope": 0.1728108629
+            },
+            "name": "VS3P2D4R"
+        },
+        {
+            "conversion": {
+                "intercept": 0.0,
+                "slope": 0.17739217205000002
+            },
+            "name": "VS2P2T1R"
+        },
+        {
+            "conversion": {
+                "intercept": 0.0,
+                "slope": 0.18391373125
+            },
+            "name": "VS3P1T1R"
+        },
+        {
+            "conversion": {
+                "intercept": 0.0,
+                "slope": 0.0718359814
+            },
+            "name": "HS4P1T6R"
+        },
+        {
+            "conversion": {
+                "intercept": 0.0,
+                "slope": 0.17015088455
+            },
+            "name": "VS2P2T7R"
+        },
+        {
+            "conversion": {
+                "intercept": 0.0,
+                "slope": 0.2090220434
+            },
+            "name": "VS3P2T6R"
+        },
+        {
+            "conversion": {
+                "intercept": 0.0,
+                "slope": 0.17400027055
+            },
+            "name": "VS2P1D5R"
+        },
+        {
+            "conversion": {
+                "intercept": 0.0,
+                "slope": 0.07375415085
+            },
+            "name": "HS4P2D8R"
+        },
+        {
+            "conversion": {
+                "intercept": 0.0,
+                "slope": 0.17870899745
+            },
+            "name": "VS3P2D6R"
+        },
+        {
+            "conversion": {
+                "intercept": 0.0,
+                "slope": 0.18090132015
+            },
+            "name": "VS3P1D6R"
+        },
+        {
+            "conversion": {
+                "intercept": 0.0,
+                "slope": 0.17868585635
+            },
+            "name": "VS3P2D8R"
+        },
+        {
+            "conversion": {
+                "intercept": 0.0,
+                "slope": 0.057299320099999995
+            },
+            "name": "HS1PT2R"
+        },
+        {
+            "conversion": {
+                "intercept": 0.0,
+                "slope": 0.06351390635000001
+            },
+            "name": "HS1PT4R"
+        },
+        {
+            "conversion": {
+                "intercept": 0.0,
+                "slope": 0.1887435705
+            },
+            "name": "VS3P1T4R"
+        },
+        {
+            "conversion": {
+                "intercept": 0.0,
+                "slope": 0.2064515823
+            },
+            "name": "VS3P1T8R"
+        },
+        {
+            "conversion": {
+                "intercept": 0.0,
+                "slope": 0.09322552505
+            },
+            "name": "HS4P1D3R"
+        },
+        {
+            "conversion": {
+                "intercept": 0.0,
+                "slope": 0.08201357135000001
+            },
+            "name": "HS4P1D2R"
+        },
+        {
+            "conversion": {
+                "intercept": 0.0,
+                "slope": 0.0628115365
+            },
+            "name": "HS1PT5R"
+        },
+        {
+            "conversion": {
+                "intercept": 0.0,
+                "slope": 0.1782878255
+            },
+            "name": "VS2P1D6R"
+        },
+        {
+            "conversion": {
+                "intercept": 0.0,
+                "slope": 0.07529479005
+            },
+            "name": "HS4P2T1R"
+        },
+        {
+            "conversion": {
+                "intercept": 0.0,
+                "slope": 0.077031218
+            },
+            "name": "HS1PD3R"
+        },
+        {
+            "conversion": {
+                "intercept": 0.0,
+                "slope": 0.1701909769
+            },
+            "name": "VS2P2D1R"
+        },
+        {
+            "conversion": {
+                "intercept": 0.0,
+                "slope": 0.17212935625
+            },
+            "name": "VS2P1T1R"
+        },
+        {
+            "conversion": {
+                "intercept": 0.0,
+                "slope": 0.1784112142
+            },
+            "name": "VS2P1T4R"
+        },
+        {
+            "conversion": {
+                "intercept": 0.0,
+                "slope": 0.27194146095000005
+            },
+            "name": "VS4P2T2R"
+        },
+        {
+            "conversion": {
+                "intercept": 0.0,
+                "slope": 0.05940366245
+            },
+            "name": "HS1PT8R"
+        },
+        {
+            "conversion": {
+                "intercept": 0.0,
+                "slope": 0.19682293680000001
+            },
+            "name": "VS3P1T6R"
+        },
+        {
+            "conversion": {
+                "intercept": 0.0,
+                "slope": 0.1822318704
+            },
+            "name": "VS2P1D3R"
+        },
+        {
+            "conversion": {
+                "intercept": 0.0,
+                "slope": 0.17459198165
+            },
+            "name": "VS2P2T4R"
+        },
+        {
+            "conversion": {
+                "intercept": 0.0,
+                "slope": 0.19059886965
+            },
+            "name": "VS3P2T5R"
+        },
+        {
+            "conversion": {
+                "intercept": 0.0,
+                "slope": 0.09244506934999999
+            },
+            "name": "HS4P2T8R"
+        },
+        {
+            "conversion": {
+                "intercept": 0.0,
+                "slope": 0.05733932925
+            },
+            "name": "HS1PD1R"
+        },
+        {
+            "conversion": {
+                "intercept": 0.0,
+                "slope": 0.17790743
+            },
+            "name": "VS2P2T8R"
+        }
+    ]
+}

@@ -2,13 +2,11 @@
 """
 import numpy as np
 from .bpm_parameters import create_bpm_config
-
 from bact_bessyii_mls_ophyd.devices.process.bpm_packed_data import packed_data_to_named_array
 import functools
 from ophyd import Component as Cpt, Signal, Kind
 from bact_device_models.devices.bpm_elem import BpmElementList, BpmElemPlane, BpmElem
-from ..raw.bpm import BPM as BPMR
-
+from ...raw.bpm import BPM as BPMR
 
 
 @functools.lru_cache(maxsize=1)

@@ -7,7 +7,7 @@ from ophyd import (
 )
 from ophyd.device import DynamicDeviceComponent as DDC
 
-from bact_bessyii_ophyd.devices.pp.quadrupoles import quadrupole_names
+from ..quadrupole.quadrupoles import quadrupole_names
 from bact_bessyii_mls_ophyd.devices.utils import reached_setpoint
 t_super = PVPositionerPC
 t_super = reached_setpoint.ReachedSetpointEPS

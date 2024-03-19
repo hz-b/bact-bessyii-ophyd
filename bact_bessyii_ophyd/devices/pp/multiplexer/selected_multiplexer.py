@@ -2,10 +2,11 @@ import threading
 import time
 
 from bact_bessyii_mls_ophyd.devices.utils.multiplexer_state_machine import MuxerState
+from bact_bessyii_ophyd.devices.pp.quadrupole.quadrupoles import quadrupole_names
+
 from ophyd import (Component as Cpt, EpicsSignal, EpicsSignalRO, Kind, PVPositionerPC, Signal, )
 from ophyd.status import AndStatus, SubscriptionStatus, Status
 
-from bact_bessyii_ophyd.devices.pp.quadrupoles import quadrupole_names
 
 _muxer_off = "Mux OFF"
 _request_off = "Off"
