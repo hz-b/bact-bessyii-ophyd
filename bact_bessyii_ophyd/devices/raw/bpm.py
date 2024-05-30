@@ -11,7 +11,8 @@ from ..utils.sync import wait_for_new_data
 
 
 class BPM(StandardReadable):
-    def __init__(self, prefix: str, name=""):
+    def __init__(self, prefix: str, name="", timeout: float=3.0):
+        self.timeout = timeout
         with self.add_children_as_readables():
             self.count = epics_signal_rw(float, prefix + ":count")
             # Twin has to export the same data as machine so int16
@@ -21,7 +22,7 @@ class BPM(StandardReadable):
         super().__init__(name=name)
 
     async def read(self):
-        await wait_for_new_data(self.bdata)
+        await wait_for_new_data(self.bdata, timeout=self.timeout)
         return super().read()
 
 
