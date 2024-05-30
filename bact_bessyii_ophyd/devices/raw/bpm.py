@@ -7,7 +7,7 @@ from ophyd_async.epics.signal.signal import epics_signal_rw
 from numpy.typing import NDArray
 import pytest
 
-from ..utils.sync import wait_for_new_data
+from ..utils.sync import new_data_arrived
 
 
 class BPM(StandardReadable):
@@ -22,7 +22,7 @@ class BPM(StandardReadable):
         super().__init__(name=name)
 
     async def read(self):
-        await wait_for_new_data(self.bdata, timeout=self.timeout)
+        await new_data_arrived(self.bdata, timeout=self.timeout)
         return super().read()
 
 
