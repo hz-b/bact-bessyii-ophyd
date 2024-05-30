@@ -2,7 +2,7 @@ from asyncio import Event, wait_for
 from typing import Union
 
 
-async def wait_for_new_data(signal, timeout: Union[float | None] = None, event: Event = None) -> None:
+async def new_data_arrived(signal, timeout: Union[float | None] = None, event: Event = None) -> None:
     """waits that new data arrive at the signal
 
     If taking longer than timeout, an asyncio.TimeoutError will
