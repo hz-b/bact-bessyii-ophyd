@@ -10,8 +10,10 @@ class Counter(StandardReadable):
             self.counter = epics_signal_rw(float, prefix + ":counter")
         super().__init__(name=name)
 
-    async def read(self):
+    async def new_data_arrived(self) -> None:
         await wait_for_new_data(self.counter, timeout=self.timeout)
+
+    async def read(self):
         return await super().read()
 
 
@@ -21,8 +23,10 @@ async def test_counter():
     cntr = Counter(prefix + "dt", name="counter")
     await cntr.connect(timeout=1)
 
+    await cntr.new_data_arrived()
     r = await cntr.read()
     print(r[cntr.counter.name]['value'])
+    await cntr.new_data_arrived()
     r = await cntr.read()
     print(r[cntr.counter.name]['value'])
 
