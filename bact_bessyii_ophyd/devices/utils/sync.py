@@ -2,7 +2,9 @@ from asyncio import Event, wait_for
 from typing import Union
 
 
-async def new_data_arrived(signal, timeout: Union[float | None] = None, event: Event = None) -> None:
+async def new_data_available(
+    signal, timeout: Union[float | None] = None, event: Event = None
+) -> None:
     """waits that new data arrive at the signal
 
     If taking longer than timeout, an asyncio.TimeoutError will
@@ -17,7 +19,13 @@ async def new_data_arrived(signal, timeout: Union[float | None] = None, event: E
     """
     event = event or Event()
 
+    assert callable(event.wait)
+    assert callable(event.set)
+    assert callable(signal.clear_sub)
+    assert callable(signal.subscribe_value)
+
     cnt = 0
+
     def cb(value):
         "count that data has been set a second time"
         nonlocal cnt
