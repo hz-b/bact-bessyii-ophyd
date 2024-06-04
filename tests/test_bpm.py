@@ -1,19 +1,25 @@
 import pytest
+from bact_bessyii_ophyd.devices.raw.bpm import BPM
 
 
 async def test_bpm():
     """read bpm data"""
     prefix = "Pierre:DT:"
-    # prefix = ""
+    prefix = ""
+
+
     bpm = BPM(prefix + "MDIZ2T5G", name="bpm")
 
     label = bpm.count.name
-    await cntr.connect(timeout=1)
-    data = await cntr.read()
+    await bpm.connect(timeout=1)
+    await bpm.new_data_available()
+    data = await bpm.read()
     v1 = data[label]["value"]
-    data = await cntr.read()
+    await bpm.new_data_available()
+    data = await bpm.read()
     v2 = data[label]["value"]
 
+    print(v1, v2)
     assert v1 + 1 == v2
 
 
@@ -34,5 +40,5 @@ async def test_bpm_aioca():
 if __name__ == "__main__":
     import asyncio
 
-    # asyncio.run(test_bpm_aioca())
+    asyncio.run(test_bpm_aioca())
     asyncio.run(test_bpm())

@@ -22,5 +22,4 @@ class BPM(StandardReadable):
         await new_data_available(self.bdata, timeout=self.timeout)
 
     async def read(self):
-        await self.new_data_available()
-        return super().read()
+        return await super().read()
