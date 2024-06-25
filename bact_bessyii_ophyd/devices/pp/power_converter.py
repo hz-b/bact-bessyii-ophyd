@@ -1,123 +1,122 @@
+import asyncio
+from typing import List, Union, Any
+
 import numpy as np
-from bact_bessyii_mls_ophyd.devices.utils import reached_setpoint
-from ophyd import (
-    Component as Cpt,
-    EpicsSignal,
-    EpicsSignalRO,
-    Kind,
-    PVPositionerPC,
-    Signal,
+from bluesky.protocols import Movable, Stageable, Stoppable, Status
+from ophyd_async.core import (
+    StandardReadable,
+    HintedSignal,
+    AsyncStatus,
+    observe_value,
+    WatchableAsyncStatus,
 )
-
-from ophyd.status import AndStatus, Status
-
-
-t_super = PVPositionerPC
-t_super = reached_setpoint.ReachedSetpointEPS
-
-_muxer_off = "Mux OFF"
-_request_off = "Off"
-
-_t_super = PVPositionerPC
+from ophyd_async.core.utils import WatcherUpdate
+from ophyd_async.epics.signal import epics_signal_r, epics_signal_rw
 
 
-class MultiplexerPowerConverter(t_super):
-    readback = Cpt(EpicsSignal, ":rdbk")
-    setpoint = Cpt(EpicsSignal, ":set")
-    # switch = Cpt(EpicsSignal, ":cmd1")
-    #: power converter on or off
-    status = Cpt(EpicsSignalRO, ":stat1", kind=Kind.omitted)
-    no_error = Cpt(EpicsSignalRO, ":stat2", kind=Kind.omitted)
+# from ophyd.status import AndStatus, Status
 
-    #: current that is small enough that switch off can be made
-    tolerable_zero_current = Cpt(
-        Signal, name="tolerable_error", value=20e-3, kind=Kind.config
-    )
 
-    #: acceptable relative error
-    eps_rel = Cpt(Signal, name="eps_rel", value=6e-2, kind=Kind.config)
+class ResettingPowerConverter(StandardReadable, Stageable, Movable, Stoppable):
+    """
+    Todo:
+        move to bact core ophyd or to bact custom bessyii_mls
+    """
 
-    #: execution stopped with a difference of 0.7 %
-    #: at a value of 0.13
-    eps_abs = Cpt(Signal, name="eps_abs", value=3e-2, kind=Kind.config)
+    def __init__(
+        self,
+        prefix: str,
+        *,
+        name="",
+        readback_suffix: str = "rdbk",
+        setpoint_suffix: str = "set",
+        ref_val_suffix: str = None,
+        atol: float,
+        rtol: float,
+        timeout: float
+    ):
 
-    def __init__(self, *args, **kwargs):
-        kwargs.setdefault("settle_time", 1.5)
-        super().__init__(*args, **kwargs)
+        assert atol > 0
+        assert rtol > 0
+        assert timeout > 0
 
-    def read(self):
-        r = super().read()
-        return r
+        with self.add_children_as_readables(HintedSignal):
+            self.readback = epics_signal_r(float, prefix + readback_suffix)
 
-    def set(self, value):
-        txt = f"Setting power mux power converter to value {value}"
-        self.log.debug(txt)
+        self.precision = epics_signal_r(int, prefix + readback_suffix + ".PREC")
+        self.units = epics_signal_r(str, prefix + readback_suffix + ".EGU")
+        self.setpoint = epics_signal_rw(float, prefix + setpoint_suffix)
+        self.atol = float(atol)
+        self.rtol = float(rtol)
+        self.timeout = float(timeout)
 
-        stat2 = Status(settle_time=self.settle_time)
+        self.reference_value = None
+        self.reference_value_signal = None
+        if ref_val_suffix is not None:
+            self.reference_value_signal = epics_signal_rw(
+                float, prefix + ref_val_suffix
+            )
 
-        def inform_finished(status):
-            stat2.set_finished()
+        super().__init__(name=name)
 
-        stat1 = super().set(value)
-        stat1.add_callback(inform_finished)
+    def set_name(self, name: str):
+        """
+        Todo:
+            Need to find out if setting name is convienience or necessity
+        """
+        super().set_name(name)
+        # Readback should be named the same as its parent in read()
+        self.readback.set_name(name)
 
-        stat = AndStatus(stat1, stat2)
-        txt = (
-            txt
-            + f" status {stat} settle time {stat.settle_time} stat2 {stat2}"
-            + " settle time {stat2.settle_time}"
+    async def stage(self) -> Union[Status, List[Any]]:
+        if self.reference_value_signal is not None:
+            self.reference_value = await self.reference_value_signal.get_value()
+        return super().stage()
+
+    @WatchableAsyncStatus.wrap
+    async def set(self, new_position: float, timeout: float = None) -> Status:
+        """
+        see :class:`ophyd_async.epics.demo.Mover` for comparison
+        """
+        timeout = timeout or self.timeout
+        self._set_success = True
+        old_position = await self.setpoint.get_value()
+
+        # Make an Event that will be set on completion, and a Status that will
+        # error if not done in time
+        done = asyncio.Event()
+        done_status = AsyncStatus(asyncio.wait_for(done.wait(), timeout))
+        # Wait for the value to set, but don't wait for put completion callback
+
+        old_position, units, precision, = await asyncio.gather(
+            self.setpoint.get_value(),
+            self.units.get_value(),
+            self.precision.get_value(),
         )
-        self.log.info(txt)
-        return stat
 
-    def _setToZero(self):
-        try:
-            self.setpoint.put(0.0, use_complete=False)
-        except Exception as exc:
-            self.log.error(f"Failed to put {self.setpoint} to 0.0")
-            raise exc
-
-    def setToZero(self):
-        cls_name = self.__class__.__name__
-        name = self.name
-        try:
-            self._setToZero()
-        except Exception as exc:
-            self.log.error(
-                f"Failed to switch of {cls_name}(name={name}): reason({exc})"
+        await self.setpoint.set(new_position, wait=False)
+        async for current_position in observe_value(
+            self.readback, done_status=done_status
+        ):
+            yield WatcherUpdate(
+                current=current_position,
+                initial=old_position,
+                target=new_position,
+                name=self.name,
+                unit=units,
+                precision=precision,
             )
+            if np.isclose(
+                current_position, new_position, rtol=self.rtol, atol=self.atol
+            ):
+                done.set()
+                break
+        if not self._set_success:
+            raise RuntimeError("Motor was stopped")
 
-    def isOff(self):
-        value = self.readback.get()
-        aval = np.absolute(value)
-        eps_abs = self.eps_abs.get()
-        flag = aval < eps_abs
-        self.log.info(f"aval {aval} eps_abs {eps_abs}, flag {flag}")
-        return flag
-
-    def isOffText(self):
-        pc_setp = self.setpoint.get()
-        pc_rdbk = self.readback.get()
-        pc_zc = self.tolerable_zero_current.get()
-        txt = f"setpoint {pc_setp} readback {pc_rdbk} tolerable zero current {pc_zc}"
-        return txt
-
-    def stop(self, success=False):
-        self.setToZero()
-
-    def stage(self):
-        val = self.status.get()
-        if not val:
-            self.log.warning(f"Muxer power converter off! val = {val} still trying")
-
-        val = self.no_error.get()
-        if not val:
-            self.log.warning(
-                f"Muxer power converter signals error val = {val}, still trying"
-            )
-
-        super().stage()
-
-    def unstage(self):
-        self.setToZero()
-        super().unstage()
+    async def stop(self, success=True):
+        self._set_success = success
+        print("Stopping setting back to %s" % (self.reference_value,))
+        if self.reference_value is not None:
+            status = await self.set(self.reference_value)
+            return status
