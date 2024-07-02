@@ -97,8 +97,8 @@ def create_bpm_config():
 if __name__ == '__main__':
     n_bpms = 10
     dtypes = np.dtype({
-        'names'   : ['name', 'state_x', 'state_y', 'ds',     'idx',    'x_scale',   'y_scale'],
-        'formats' : ['U20',   np.bool_,  np.bool_,  np.float_, np.int_,  np.float_,  np.float_]
+        'names'   : ['name', 'state_x', 'state_y', 'ds',  'idx', 'x_scale',  'y_scale'],
+        'formats' : ['U20',   np.bool_,  np.bool_,  float, int,  float,      float]
         }
     )
     data = np.array(n_bpms, dtype=dtypes)
