@@ -40,10 +40,12 @@ def create_bpm_config():
                   a mapping from raw_value to physics_value.
     '''
 
-    t_names = ['name', 'x_state', 'y_state',  's',      'idx']
-    formats = ['U20',   np.bool_,  np.bool_,   np.float_, np.int_]
+    # fmt: off
+    t_names = ['name', 'x_state', 'y_state',  's',   'idx']
+    formats = ['U20',   np.bool_,  np.bool_,  float,  int]
     t_names += ['x_scale', 'y_scale', 'x_offset', 'y_offset']
-    formats += [np.float_, np.float_,  np.float_,  np.float_]
+    formats += [float,      float,     float,      float]
+    # fmt: on
     dtypes = np.dtype({'names':  t_names, 'formats': formats})
 
     n_bpms = len(bpm_config.bpm_conf)
