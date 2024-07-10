@@ -1,0 +1,62 @@
+name: Python package
+
+on:
+  push:
+    branches: [ "dev/main" ]
+  pull_request:
+    branches: [ "dev/main" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.9", "3.10", "3.11", "3.12"]
+
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ matrix.python-version }}
+        cache: 'pip'
+        cache-dependency-path: |
+           **/pyproject.toml
+           **/requirements*.txt
+
+    - name: Checkout bact-device-models
+      uses: actions/checkout@v4
+      with:
+          repository: hz-b/bact-device-models
+          path: bact-device-models
+
+    - name: Install bact dependencies bact-device-models
+      run: | 
+           t_dir=bact-device-models
+           if [ -f $t_dir/requirements.txt ]; then pip install -r $t_dir/requirements.txt; fi
+           # make it a path, otherwise it searches pypi repo
+           pip install $t_dir/
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip wheel
+        python -m pip install flake8 pytest
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+        pip install .
+
+    - name: Install package
+      run: |
+        python -m pip install flake8 pytest
+    - name: Lint with flake8
+      run: |
+        # stop the build if there are Python syntax errors or undefined names
+        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+        # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
+        flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+
+    # - name: Test with pytest
+    #  run: |
+    #    pytest
