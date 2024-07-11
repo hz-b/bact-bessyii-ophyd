@@ -13,8 +13,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: [ "3.9" ] #,  "3.10", "3.11", "3.12"                 
-        numpy-version: [ "numpy<2.0" ] #, "numpy>=2.0"                        
+        python-version: [ "3.9" , "3.10", "3.11", "3.12" ]
+        numpy-version: [ "numpy<2.0" , "numpy>=2.0" ]
 
     steps:
     - uses: actions/checkout@v4
@@ -35,7 +35,7 @@ jobs:
           path: bact-device-models
 
     - name: Install bact dependencies bact-device-models
-      run: | 
+      run: |
            t_dir=bact-device-models
            if [ -f $t_dir/requirements.txt ]; then pip install -r $t_dir/requirements.txt; fi
            # make it a path, otherwise it searches pypi repo
