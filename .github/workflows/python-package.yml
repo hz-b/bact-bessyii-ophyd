@@ -48,6 +48,9 @@ jobs:
         python -m pip install --upgrade pip wheel
         python -m pip install flake8 pytest
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+        echo "--installing pacakage wtih numpy -------------------------------------------------"
+        find . -type f
+        echo pip install '${{ matrix.numpy-version }}' ./
         pip install '${{ matrix.numpy-version }}' ./
 
     - name: Install package
