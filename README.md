@@ -1,4 +1,4 @@
-[![CI](https://github.com/bluesky/ophyd-async/actions/workflows/ci.yml/badge.svg)](https://github.com/hz-b/bact-bessyii-ophyd/actions/workflows/ci.yml)
+[![CI](https://github.com/hz-b/bact-bessyii-ophyd/actions/workflows/python-package.yml/badge.svg)](https://github.com/hz-b/bact-bessyii-ophyd/actions/workflows/python-package.yml)
 
 # bact-bessyii-ophyd
 
