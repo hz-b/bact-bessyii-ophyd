@@ -17,3 +17,5 @@ keywords = []
 python = ">=3.7"
 ophyd  = ">=1.5"
 bact-device-models = "*"
+# should also allow alternatics like caproto
+pyepcis = "*"
