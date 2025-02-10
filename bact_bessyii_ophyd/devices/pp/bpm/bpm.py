@@ -119,7 +119,7 @@ class BPM(BPMR):
         # only take the bpm's which are valid
         # minus one is significant: indices are still starting from one
         # need to be shifted here
-        bpm_packed_data_chunks = bpm_packed_data_chunks[self.indices.get() -1 ]
+        bpm_packed_data_chunks = bpm_packed_data_chunks[self.indices.get()  ]
 
         # todo: get names and index correct in reading bpm data
         names_to_use = list(self.names.get()) #+ [f'bpmz_added:{cnt}' for cnt in range(14)]

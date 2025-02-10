@@ -264,6 +264,8 @@ bpm_offset = {
     "BPMZ3D1R":  (-2.517700e-02, -6.084290e-01),
     "BPMZ4D1R":  (-2.322388e-02, -6.217347e-01),
 }
+import os
+import yaml
 
 #: Translation of status
 #: the bits

@@ -4,7 +4,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
 name = "bact_bessyii_ophyd"
-version = "0.0.1"
+version = "0.0.2"
 description = "Ophyd devices for Bessy II  light source."
 authors = [ "Pierre Schnizer", "Waheedullah Sulaiman Khail"]
 license = "GPL-3.0"
@@ -17,5 +17,7 @@ keywords = []
 python = ">=3.7"
 ophyd  = ">=1.5"
 bact-device-models = "*"
+pyyaml = "*"
+pandas = "*"
 # should also allow alternatics like caproto
 pyepics = "*"
