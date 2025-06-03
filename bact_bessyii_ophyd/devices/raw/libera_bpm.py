@@ -10,6 +10,7 @@ from ophyd import Component as Cpt, Device, EpicsSignalRO, Kind, Signal
 from ophyd.status import AndStatus, SubscriptionStatus
 from enum import IntEnum
 
+from ophyd import EpicsSignal
 
 class ClockSyncState(IntEnum):
     """internal clocks, synchronised by hardware trigger?
@@ -26,7 +27,7 @@ class TriggerState(IntEnum):
     """
     external = 1
 
-    
+
 class CacheRead(Device):
     #: x channel to read from
     x_read = Cpt(EpicsSignalRO, ".X", kind=Kind.omitted)
@@ -87,18 +88,18 @@ class Triggers(Device):
         if self.src.get() != TriggerState.external:
             raise AssertionError("Trigger should be in external mode")
 
-    
-    
+
+
 class TurnbyTurnDDCData(Device):
     """
     """
     tbt = Cpt(CacheRead, "signals:ddc_synth", name="tbt", timeout=12)
     trg = Cpt(Triggers, "triggers:t2:")
-    
+
     def trigger(self):
         return self.tbt.trigger()
 
-    
+
 class TurnbyTurnTBTData(Device):
     """
     """
@@ -107,7 +108,17 @@ class TurnbyTurnTBTData(Device):
 
     def trigger(self):
         return self.tbt.trigger()
-    
+
+
+class DSPControlOffset(Device):
+    #: todo check desciption
+    x = Cpt(EpicsSignal, ":off_x_mon", kind=Kind.config)
+    y = Cpt(EpicsSignal, ":off_y_mon", kind=Kind.config)
+
+
+class DSPControl(Device):
+    offset = Cpt(DSPControlOffset, ":dsp")
+
 
 def test_libera_read_slow_data():
     from pprint import pprint
@@ -147,13 +158,18 @@ def test_libera_read_turn_by_turn():
             pprint.pprint(fast_data.read())
         fast_data.unstage()
 
-        
+
 def test_libera_read_fast_data():
     """need to understand why fast data behave so differently
     """
     from pprint import pprint
 
-    
+    config = DSPControl("BPMZ3T7R", name="t_bpm")
+    if not config.connected:
+        config.wait_for_connection(3)
+
+    return
+
     fast_data = CacheRead("BPMZ5D8R:signals:fa", name="fa", timeout=20)
     if not fast_data.connected:
         fast_data.wait_for_connection(3)
@@ -168,7 +184,31 @@ def test_libera_read_fast_data():
         print(f"fast data {i}: trigger flagged {flag}")
 
 
+def test_libera_read_config():
+    """need to understand why fast data behave so differently
+    """
+    from pprint import pprint
+
+    # normally read from some database or if so file ...
+    # yes you can write it dir
+    offsets = dict(
+        BPMZ2D8R=dict(x=-1, y=1),
+        BPMZ3D8R=dict(x=2, y=3),
+        BPMZ1D1R=dict(x=5, y=7),
+        BPMZ2D1R=dict(x=11, y=13),
+    )
+
+    for bpm_name, off in offsets.items():
+        config = DSPControl(bpm_name, name=bpm_name.lower())
+        if not config.connected:
+            config.wait_for_connection(3)
+            # config.offset.configure(off)
+
+            pprint( config.read_configuration() )
+
+
 if __name__ == '__main__':
-    test_libera_read_slow_data()
-    test_libera_read_fast_data()
-    test_libera_read_turn_by_turn()
+    test_libera_read_config()
+    # test_libera_read_slow_data()
+    # test_libera_read_fast_data()
+    # test_libera_read_turn_by_turn()
